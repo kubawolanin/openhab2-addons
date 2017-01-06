@@ -1,0 +1,973 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Li",
+				"Living\t(home.items)"
+			],
+			[
+				"open",
+				"openhab2"
+			],
+			[
+				"Ś",
+				"Światła"
+			],
+			[
+				"weather-co",
+				"weather-content\t(_climaicon.scss)"
+			],
+			[
+				"weath",
+				"weather-icon\t(weather.tpl.html)"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"disl",
+				"display"
+			],
+			[
+				"movi",
+				"moviePath"
+			],
+			[
+				"entr",
+				"entryExist"
+			],
+			[
+				"PRICE",
+				"PRICE_TO"
+			],
+			[
+				"PRICE_",
+				"PRICE_FROM"
+			],
+			[
+				"tty",
+				"ttyAMA0"
+			],
+			[
+				"un",
+				"unitPrice"
+			],
+			[
+				"first",
+				"firstCol"
+			],
+			[
+				"parse",
+				"parsedResults"
+			],
+			[
+				"seq",
+				"seqno"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 41.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"java",
+				"Pretty JSON: Validate"
+			],
+			[
+				"package up",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"termn",
+				"Preferences: Terminal Settings – User"
+			],
+			[
+				"scss",
+				"Set Syntax: SCSS"
+			],
+			[
+				"winme",
+				"WinMerge: Show Diff"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"AlignTab: Live Preview Mode"
+			],
+			[
+				"html",
+				"HTMLPrettify"
+			],
+			[
+				"es",
+				"ESLint Formatter: Format this file"
+			],
+			[
+				"formatt",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimall",
+				"Sublimall: Upload"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"eslin",
+				"ESLint Formatter: Format this file"
+			],
+			[
+				"pretty",
+				"HTMLPrettify"
+			],
+			[
+				"csscom",
+				"Run CSScomb"
+			],
+			[
+				"css",
+				"Run CSScomb"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"markd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"alignment",
+				"Preferences: Alignment File Settings – Default"
+			],
+			[
+				"coffee",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"forma",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"insall",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"color",
+				"Toggle Colorcode on this view"
+			],
+			[
+				"packag insta",
+				"Package Control: Install Package"
+			],
+			[
+				"packag remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"colorcode",
+				"Toggle Colorcode on this view"
+			],
+			[
+				"aut",
+				"PHP CodeBeautifier"
+			],
+			[
+				"php",
+				"PHP CodeBeautifier"
+			],
+			[
+				"format",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"isntal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 536.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"//OPENHABIANPI/openHAB-conf/.gitignore",
+		"//OPENHABIANPI/openHAB-conf/html/scrap/airquality.js",
+		"/C/Users/Kuba/Desktop/dump.html",
+		"/C/projects/scraper/airquality.js",
+		"//OPENHABIANPI/openHAB-conf/items/speedtest.items",
+		"//OPENHABIANPI/openHAB-conf/rules/speedtest.rules",
+		"/C/openhab2-master/git/openhab2-addons/addons/voice/org.openhab.voice.ivona/pom.xml",
+		"/C/openhab2-master/git/openhab2-addons/addons/voice/pom.xml",
+		"/C/Users/Kuba/Desktop/openhab.log",
+		"/C/Users/Kuba/AppData/Local/Temp/scp20736/var/log/openhab2/openhab.log",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/rules_openhab.rules",
+		"/C/Users/Kuba/Downloads/win.md",
+		"/C/Users/Kuba/.bashrc",
+		"/C/Users/Kuba/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/switch/switch.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/node_modules/ajv/lib/dotjs/switch.js",
+		"/C/Users/Kuba/Dropbox/SmartHome/Instructions/Network.txt",
+		"/C/Users/Kuba/pi/backup/openhab.cfg",
+		"/C/projects/openhab_/conf/items/weather.items",
+		"/C/projects/openhab_/conf/items/speedtest.items",
+		"//OPENHABIANPI/openHAB-conf/sitemaps/default.sitemap",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/speedtest.rules",
+		"//OPENHABIANPI/openHAB-conf/items/weather.items",
+		"//OPENHABIANPI/openHAB-conf/items/home.items",
+		"/C/Users/Kuba/Desktop/sitemap-converter.js",
+		"//OPENHABIANPI/openHAB-userdata/zwave/node10.xml",
+		"/C/projects/sub/index.js",
+		"/C/Users/Kuba/Dropbox/SmartHome/persistence/influxdb.persist",
+		"//OPENHABIANPI/openHAB-conf/items/devices.items",
+		"//OPENHABIANPI/openHAB-conf/services/influxdb.cfg",
+		"//OPENHABIANPI/openHAB-conf/persistence/influxdb.persist",
+		"//OPENHABIANPI/openHAB-userdata/zwave/node8.xml",
+		"/C/Users/Kuba/Dropbox/SmartHome/items/home.items",
+		"/C/Users/Kuba/Dropbox/SmartHome/items/weather.items",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/weather.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/services/openhab.service.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/weather.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/weather.tpl.html",
+		"/C/Users/Kuba/Dropbox/medius.html",
+		"/C/projects/sub/sub.bat",
+		"/C/Users/Kuba/Downloads/Movies/Black.Mirror.S03E02.WEBRip.x264-SKGTV[rarbg]/black.mirror.s03e02.webrip.x264-skgtv.srt",
+		"/C/Users/Kuba/Dropbox/SmartHome/items/speedtest.items",
+		"/C/projects/scraper/scrap.js",
+		"//OPENHABIANPI/openHAB-conf/services/mqtt.cfg",
+		"/C/Users/Kuba/Desktop/Nałkowskiej/Nalkowskiej.txt",
+		"/C/projects/scraper/test.js",
+		"//OPENHABIANPI/openHAB-conf/sitemaps/home.sitemap",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/zwave.rules",
+		"/C/Users/Kuba/Dropbox/SmartHome/items/devices.items",
+		"/C/projects/openhab_/conf/persistence/influxdb.persist",
+		"/C/projects/openhab_/conf/items/devices.items",
+		"/C/projects/openhab_/conf/items/home.items",
+		"//OPENHABIANPI/openHAB-conf/services/weather.cfg",
+		"/C/Users/Kuba/pi/openhab.cfg",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/watchdog.sh",
+		"/C/projects/openhab_/conf/persistence/rrd4j.persist",
+		"/C/projects/openhab_/conf/items/demo.items",
+		"//OPENHABIANPI/openHAB-userdata/zwave/node1.xml",
+		"//OPENHABIANPI/openHAB-userdata/zwave/node53.xml",
+		"/C/Users/Kuba/AppData/Local/Temp/scp10679/opt/scrap/petrol.js",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/icons/freepik-housethings/mail-box.svg",
+		"/C/projects/org.openhab.ui.habpanel/web/app/settings/settings.html.bak",
+		"/C/Users/Kuba/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
+		"/C/projects/org.openhab.ui.habpanel/web/app/menu/menu.controller.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/services/persistence.service.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/chart/chart.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/button/button.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/dashboard/dashboard.edit.controller.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/weather.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/bower_components/selectize/dist/sass/selectize.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles/common.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/vendor/vendor.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/image/image.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/_climaicon.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/settings/settings.html",
+		"/C/projects/org.openhab.ui.habpanel/web/index.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/weather/_math.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles/themes/translucent/translucent.min.css",
+		"/C/Users/Kuba/.gitconfig",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/dummy/dummy.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/gulpfile.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/image/image.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/bower_components/selectize/dist/sass/selectize.bootstrap3.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/chart/chart.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/app.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/thermostat/thermostat.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/thermostat/thermostat.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/thermostat/thermostat.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/icons/climacons.json",
+		"/C/Users/Kuba/Downloads/Movies/The.Fall.S03E01.WEB-DL.x264-RARBG/The.Fall.S03E01.WEB-DL.x264-RARBG.srt",
+		"/C/projects/svg/entry.txt",
+		"/C/Users/Kuba/Desktop/wp-cloudy/wpcloudy-admin.php",
+		"/C/projects/entry.txt",
+		"/C/Users/Kuba/Dropbox/SmartHome/transform/weather_pl.map",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/ventilation.rules",
+		"/C/Users/Kuba/Dropbox/SmartHome/rules/traffic.rules",
+		"/C/projects/scraper/test.html",
+		"/C/Users/Kuba/Desktop/sub.bat",
+		"/C/projects/org.openhab.ui.habpanel/.git/info/exclude",
+		"/C/Users/Kuba/Downloads/Movies/The.Fall.S03E01.WEB-DL.x264-RARBG/The.Fall.S03E01.WEB-DL.x264-RARBG_kopia.srt",
+		"/C/Users/Kuba/Downloads/Movies/Jordskott S01 E01 - Hardcoded Eng Subs - Sno/Jordskott S01 E01 - Hardcoded Eng Subs - Sno.mp4",
+		"/C/projects/org.openhab.ui.habpanel/web/app/settings/settings.controller.js",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/label/label.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/label/label.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/template/template.settings.tpl.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/template/template.widget.js",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles/dashboard.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/package.json",
+		"/C/projects/org.openhab.ui.habpanel/web/vendor/vendor.min.css",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles.min.css",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/button/button.widget.js",
+		"/C/Users/Kuba/Dropbox/SmartHome/Dash/dash_buttons.txt",
+		"/C/projects/org.openhab.ui.habpanel/web/bower_components/roboto-fontface/css/mixins.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/bower_components/roboto-fontface/css/roboto/sass/roboto-fontface.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/dashboard/dashboard.edit.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/menu/menu.html",
+		"/C/projects/org.openhab.ui.habpanel/web/app/dashboard/dashboard.view.controller.js",
+		"/C/projects/org.openhab.ui.habpanel/web/bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles/variables.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/vendor/vendor.js",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles.less",
+		"/C/projects/org.openhab.ui.habpanel/web/.eslintrc.yaml",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles/widgets.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/assets/styles.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/template/template.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/switch/switch.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/slider/slider.scss",
+		"/C/projects/org.openhab.ui.habpanel/web/app/widgets/label/label.scss"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\*",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\*.scss",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\**\\*.scss",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\assets",
+			"C:\\projects\\org.openhab.ui.habpanel\\web",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\app\\widgets",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\assets\\less",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\app",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\assets\\less",
+			"C:\\projects\\org.openhab.ui.habpanel\\web\\app",
+			"C:\\projects\\org.openhab.ui.habpanel\\web",
+			"C:\\projects\\atlasboard",
+			"C:\\projects\\habmin\\src\\languages\\",
+			"C:\\projects\\habmin\\src\\languages\\pl-PL"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"washingstate",
+			"Indeks Jakości Powietrza:",
+			"115",
+			"niezdrow",
+			"log",
+			"rerun",
+			"float",
+			"aqi",
+			"speedtestCliOutput",
+			"module",
+			"amazon",
+			"eth0",
+			"eth0:",
+			"Washingmachine_OpState",
+			"Washingmachine_Power",
+			"eth0:",
+			"wlan0",
+			"eth0:",
+			"eth0",
+			"eth",
+			"wlan0",
+			"lo:",
+			"lo",
+			"wlan0",
+			"amazon",
+			"DHCP",
+			")\n",
+			"dziecka",
+			"Living_Window_Battery",
+			"luminan",
+			"LAMP",
+			"everyHour",
+			")\n",
+			"Office_Humidity",
+			"Office_Temp",
+			"Ruch",
+			"forecast",
+			"sensor",
+			"salonie",
+			"5KW",
+			"Relay",
+			"value",
+			"Item",
+			"modal",
+			"bootstrap",
+			"@",
+			"increase",
+			"sin",
+			"value",
+			"temperatureItem",
+			"form",
+			"\\n\\n",
+			"function ",
+			"}\\n",
+			"() {",
+			"\t';\\n",
+			"\treturn '\\n",
+			"Lightning",
+			"=",
+			"thunder",
+			"aqi",
+			"();\n",
+			"Work_Traffic",
+			",",
+			"switch",
+			"dummy",
+			"registerType",
+			"register",
+			"Dummy",
+			"dummy",
+			"function",
+			"backgroundColor",
+			">\n",
+			"wid",
+			"ui-thermostat",
+			"<<<<<",
+			"widget",
+			"knob",
+			"Knob",
+			"RESTConfig",
+			"rest.host",
+			"OH2ServiceConfiguration",
+			"panelsRegistry",
+			"rootScope",
+			"rest.host",
+			"'rest'",
+			"OH2StorageService",
+			"/rest/",
+			"rest.host",
+			"HOST",
+			"config",
+			"/rest/",
+			" '/",
+			"/rest/",
+			"selectize-box-shadow",
+			"js",
+			"',\n",
+			"min",
+			"',\n",
+			"\";\n",
+			"gridster",
+			"$widget-color",
+			"dash-buttons",
+			"$widget-bg",
+			"$primary-bg",
+			"less",
+			"less/",
+			"sign",
+			"$scope",
+			"$slider-pointer",
+			"calc(",
+			"fade(",
+			".main",
+			"template",
+			"bootstrap",
+			"bootstrap-sass-asset-helper",
+			"\";\n",
+			"less",
+			"];\n",
+			"',\n",
+			"hash",
+			"',\n",
+			"calc",
+			"calc:",
+			"Title Text color",
+			"Fullscreen",
+			"goFullscreen",
+			"btn"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"script",
+			"WashingState",
+			"WashingMeter",
+			"",
+			"Weather",
+			"weather",
+			"thermostat",
+			"Thermostat",
+			"RESTConfig.host",
+			"rest.host",
+			"$widget-design-bg",
+			"$widget-color",
+			"$primary-color",
+			"@widget-text-color",
+			"@widget-bg",
+			"@primary-bg",
+			"nodeScriptOutput",
+			"",
+			"=",
+			"',",
+			": '",
+			",\\n",
+			"\\n",
+			"then",
+			"end",
+			"\\nthen\\n\\t->",
+			"Living Room",
+			"Astro",
+			"Thermometers",
+			"\"\"",
+			"\\nthen\\nend",
+			"end",
+			"background-color: inherit;",
+			"gDevices",
+			"XXXX",
+			"]|T",
+			"|http",
+			"raspberrypi",
+			"Weather",
+			"(Weather)",
+			"Chłodny wiatr",
+			"Podmuch wiatru",
+			"Prędkość wiatru",
+			"Temperatura",
+			"Flat",
+			": ",
+			" :",
+			" ",
+			"\",",
+			": \"",
+			",\\n",
+			"\"\\n\"",
+			">",
+			"</",
+			"\"",
+			"\\n",
+			"\\r\\n",
+			"wykres",
+			"Wykres",
+			"Wykresy",
+			"Przedmioty",
+			"Wykresy",
+			"Home_away",
+			"Flat_",
+			"flat_",
+			"(Flat)",
+			"(Parter)",
+			"swiatla",
+			"sufity",
+			"parter",
+			"",
+			"boiler",
+			"parter",
+			"Parter",
+			"parter",
+			"Parter",
+			"xbmc:laptop",
+			"\"Drzwi wejściowe ",
+			"\"Temperatura ",
+			"\"Okno Pracowni\"",
+			"\"Łazienka\"",
+			"\"Sypialnia\"",
+			"\"Pokój dzienny\"",
+			"\"Kuchnia\"",
+			"\"Toaleta\"",
+			"\"Drzwi wejściowe\"",
+			"\"Taras\"",
+			"\"Garaż\"",
+			"\"Pralnia\"",
+			"\"Lustro\"",
+			"\"Korytarz\"",
+			"\"Sufit\"",
+			"-",
+			"",
+			",",
+			" ",
+			"\\n",
+			";\\n",
+			"\\n",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": ".classpath.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"package",
+				"Package Control Messages"
+			],
+			[
+				"wea",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\weather.tpl.html"
+			],
+			[
+				"",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\weather.widget.js"
+			],
+			[
+				"switch",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\switch\\switch.widget.js"
+			],
+			[
+				"weather",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\weather.tpl.html"
+			],
+			[
+				"weat",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\weather.scss"
+			],
+			[
+				"clima",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\_climaicon.scss"
+			],
+			[
+				"_math",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\_math.scss"
+			],
+			[
+				"_clima",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\weather\\_climaicon.scss"
+			],
+			[
+				"settings",
+				"org.openhab.ui.habpanel\\web\\app\\settings\\settings.html"
+			],
+			[
+				"gulp",
+				"org.openhab.ui.habpanel\\web\\gulpfile.js"
+			],
+			[
+				"index",
+				"org.openhab.ui.habpanel\\web\\index.html"
+			],
+			[
+				"g",
+				"org.openhab.ui.habpanel\\web\\gulpfile.js"
+			],
+			[
+				"gul",
+				"org.openhab.ui.habpanel\\web\\gulpfile.js"
+			],
+			[
+				"app.",
+				"org.openhab.ui.habpanel\\web\\app\\app.js"
+			],
+			[
+				"imagesett",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\image\\image.settings.tpl.html"
+			],
+			[
+				"vendor",
+				"org.openhab.ui.habpanel\\web\\vendor\\vendor.scss"
+			],
+			[
+				"selectize",
+				"org.openhab.ui.habpanel\\web\\bower_components\\selectize\\dist\\sass\\selectize.scss"
+			],
+			[
+				"packa",
+				"org.openhab.ui.habpanel\\web\\package.json"
+			],
+			[
+				"dashoview",
+				"org.openhab.ui.habpanel\\web\\app\\dashboard\\dashboard.view.controller.js"
+			],
+			[
+				"menu",
+				"org.openhab.ui.habpanel\\web\\app\\menu\\menu.html"
+			],
+			[
+				"settin",
+				"org.openhab.ui.habpanel\\web\\app\\settings\\settings.html"
+			],
+			[
+				"stylesmin",
+				"org.openhab.ui.habpanel\\web\\assets\\styles.min.css"
+			],
+			[
+				"style",
+				"org.openhab.ui.habpanel\\web\\assets\\styles.less"
+			],
+			[
+				"dasho",
+				"org.openhab.ui.habpanel\\web\\assets\\styles\\dashboard.scss"
+			],
+			[
+				"roboto-font",
+				"org.openhab.ui.habpanel\\web\\bower_components\\roboto-fontface\\css\\roboto\\sass\\roboto-fontface.scss"
+			],
+			[
+				"vendro",
+				"org.openhab.ui.habpanel\\web\\vendor\\vendor.scss"
+			],
+			[
+				"labelhtml",
+				"org.openhab.ui.habpanel\\web\\app\\widgets\\label\\label.tpl.html"
+			],
+			[
+				"common",
+				"org.openhab.ui.habpanel\\web\\assets\\styles\\common.scss"
+			],
+			[
+				"_variab",
+				"org.openhab.ui.habpanel\\web\\bower_components\\bootstrap-sass\\assets\\stylesheets\\bootstrap\\_variables.scss"
+			],
+			[
+				"roboto-fon",
+				"org.openhab.ui.habpanel\\web\\bower_components\\roboto-fontface\\css\\roboto\\sass\\roboto-fontface.scss"
+			],
+			[
+				"eslintrc",
+				"org.openhab.ui.habpanel\\web\\.eslintrc.yaml"
+			],
+			[
+				"variable",
+				"org.openhab.ui.habpanel\\web\\assets\\styles\\variables.scss"
+			],
+			[
+				"_vari",
+				"org.openhab.ui.habpanel\\web\\bower_components\\bootstrap-sass\\assets\\stylesheets\\bootstrap\\_variables.scss"
+			],
+			[
+				"widgets",
+				"org.openhab.ui.habpanel\\web\\assets\\styles\\widgets.scss"
+			],
+			[
+				"variabl",
+				"org.openhab.ui.habpanel\\web\\assets\\styles\\variables.scss"
+			],
+			[
+				"sitemap",
+				"org.openhab.ui.habpanel\\web\\sitemap.js"
+			],
+			[
+				"con",
+				"org.openhab.ui.habpanel\\CONTRIBUTING.md"
+			],
+			[
+				"main",
+				"org.openhab.ui.habpanel\\MAINTAINERS"
+			],
+			[
+				"aut",
+				"org.openhab.ui.habpanel\\AUTHORS"
+			],
+			[
+				"vair",
+				"org.openhab.ui.habpanel\\web\\assets\\less\\variables.scss"
+			],
+			[
+				"variab",
+				"org.openhab.ui.habpanel\\web\\assets\\less\\variables.scss"
+			],
+			[
+				"bower",
+				"org.openhab.ui.habpanel\\web\\bower.json"
+			],
+			[
+				"bowe",
+				"org.openhab.ui.habpanel\\web\\bower.json"
+			],
+			[
+				"widget",
+				"org.openhab.ui.habpanel\\web\\assets\\less\\widgets.less"
+			],
+			[
+				"gulpf",
+				"org.openhab.ui.habpanel\\web\\gulpfile.js"
+			],
+			[
+				"variables",
+				"org.openhab.ui.habpanel\\web\\bower_components\\bootstrap\\less\\variables.less"
+			],
+			[
+				"varia",
+				"board\\bower_components\\font-awesome\\less\\variables.less"
+			],
+			[
+				"myfi",
+				"board\\packages\\demo\\dashboards\\myfirst_dashboard.json"
+			],
+			[
+				"example1",
+				"board\\packages\\atlassian\\dashboards\\example1.json"
+			],
+			[
+				"pictu",
+				"board\\packages\\demo\\jobs\\picture-of-the-day\\picture-of-the-day.js"
+			],
+			[
+				"generate-da",
+				"board\\packages\\charts\\jobs\\generate-data\\generate-data.js"
+			],
+			[
+				"rick",
+				"board\\packages\\charts\\dashboards\\rickshaw-demo-dashboard.json"
+			],
+			[
+				"rickshaw",
+				"board\\packages\\charts\\dashboards\\rickshaw-demo-dashboard.json"
+			],
+			[
+				"picture-of",
+				"board\\packages\\demo\\jobs\\picture-of-the-day\\picture-of-the-day.js"
+			],
+			[
+				"twitter",
+				"board\\packages\\charts\\widgets\\twitter\\twitter.js"
+			],
+			[
+				"failed",
+				"board\\packages\\atlassian\\jobs\\failed-builds\\failed-builds.js"
+			],
+			[
+				"boom",
+				"C:\\projects\\habmin\\boom.bat"
+			],
+			[
+				"schedule",
+				"packages\\atlassian\\node_modules\\bluebird\\js\\main\\schedule.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
