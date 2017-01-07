@@ -36,11 +36,13 @@ public class IvonaTTSService implements TTSService {
     /** Cache folder name is below userdata/ivona/cache. */
     private static final String CACHE_FOLDER_NAME = "ivona/cache";
 
-    // API Key and API Secret comes from ConfigAdmin
-    private static final String CONFIG_API_KEY = "apiKey";
-    private static final String CONFIG_API_SECRET = "apiSecret";
-    private String apiKey = null;
-    private String apiSecret = null;
+    // API Key, API Secret and Endpoint comes from ConfigAdmin
+    private static final String CONFIG_ACCESS_KEY = "accessKey";
+    private static final String CONFIG_SECRET_KEY = "secretKey";
+    private static final String CONFIG_ENDPOINT = "endpoint";
+    private String accessKey = null;
+    private String secretKey = null;
+    private String endpoint = null;
 
     private final Logger logger = LoggerFactory.getLogger(IvonaTTSService.class);
 
@@ -77,8 +79,14 @@ public class IvonaTTSService implements TTSService {
 
     protected void modified(Map<String, Object> config) {
         if (config != null) {
-            this.apiKey = config.containsKey(CONFIG_API_KEY) ? config.get(CONFIG_API_KEY).toString() : null;
-            this.apiSecret = config.containsKey(CONFIG_API_SECRET) ? config.get(CONFIG_API_SECRET).toString() : null;
+            this.accessKey = config.containsKey(CONFIG_ACCESS_KEY) ? config.get(CONFIG_ACCESS_KEY).toString() : null;
+            this.secretKey = config.containsKey(CONFIG_SECRET_KEY) ? config.get(CONFIG_SECRET_KEY).toString() : null;
+
+            if (config.containsKey(CONFIG_ENDPOINT)) {
+                this.endpoint = "tts." + config.get(CONFIG_ENDPOINT).toString() + ".ivonacloud.com";
+            } else {
+                this.endpoint = null;
+            }
         }
     }
 
@@ -95,11 +103,11 @@ public class IvonaTTSService implements TTSService {
     @Override
     public AudioStream synthesize(String text, Voice voice, AudioFormat requestedFormat) throws TTSException {
         logger.debug("Synthesize '{}' for voice '{}' in format {}", text, voice.getUID(), requestedFormat);
-        // Validate known api key
-        if (this.apiKey == null) {
+        // Validate known API key
+        if (this.accessKey == null) {
             throw new TTSException("Missing API key, configure it first before using");
         }
-        if (this.apiSecret == null) {
+        if (this.secretKey == null) {
             throw new TTSException("Missing API Secret, configure it first before using");
         }
         // Validate arguments
@@ -125,8 +133,9 @@ public class IvonaTTSService implements TTSService {
         // now create the input stream for given text, locale, format. There is
         // only a default voice
         try {
-            File cacheAudioFile = ivonaImpl.getTextToSpeechAsFile(this.apiKey, this.apiSecret, text,
+            File cacheAudioFile = ivonaImpl.getTextToSpeechAsFile(this.accessKey, this.secretKey, this.endpoint, text,
                     voice.getLocale().toLanguageTag(), requestedFormat.getCodec());
+
             if (cacheAudioFile == null) {
                 throw new TTSException("Could not read from Ivona service");
             }

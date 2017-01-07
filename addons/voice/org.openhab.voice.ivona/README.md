@@ -19,29 +19,9 @@ https://www.ivona.com/us/account/speechcloud/creation/
 
 ## Configuration
 
-You have to add your API_KEY and API_SECRET to your configuration, e.g. by adding a file "ivona.cfg" to the services folder, with this entry:
+You have to add your ACCESS_KEY and SECRET_KEY to your configuration, e.g. by adding a file "ivona.cfg" to the services folder, with this entry:
 
 ```
-apiKey=1234567890
-apiSecret=abcd1234
-```
-
-## Caching
-
-The VoiceRSS extension does cache audio files from previous requests, to reduce traffic, improve performance, reduce number of requests and provide same time offline capability.
-
-For convenience, there is a tool where the audio cache can be generated in advance, to have a prefilled cache when starting this extension. You have to copy the generated data to your userdata/voicerss/cache folder.
-
-Synopsis of this tool:
-
-```
-Usage: java org.openhab.voice.voicerss.tool.CreateTTSCache <args>
-Arguments: --api-key <key> <cache-dir> <locale> { <text> | @inputfile }
-  key       the VoiceRSS API Key, e.g. "123456789"
-  cache-dir is directory where the files will be stored, e.g. "voicerss-cache"
-  locale    the language locale, has to be valid, e.g. "en-us", "de-de"
-  text      the text to create audio file for, e.g. "Hello World"
-  inputfile a name of a file, where all lines will be translatet to text, e.g. "@message.txt"
-
-Sample: java org.openhab.voice.voicerss.tool.CreateTTSCache --api-key 1234567890 cache en-US @messages.txt
+accessKey=1234567890
+secretKey=abcd1234
 ```

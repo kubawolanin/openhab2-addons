@@ -24,21 +24,18 @@ import org.eclipse.smarthome.core.audio.AudioFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ivonacloud.aws.auth.ClasspathPropertiesFileCredentialsProvider;
+import com.ivonacloud.services.tts.IvonaSpeechCloudClient;
+
 /**
  * This class implements the Cloud service from Ivona. For more information,
  * see API documentation at http://www.ivona.org/api/documentation.aspx.
  *
- * Current state of implementation:
- * <ul>
- * <li>Only EN and DE languages supported</li>
- * <li>Only default voice supported with good audio quality</li>
- * <li>Only MP3 audio format supported</li>
- * <li>It uses HTTP and not HTTPS (for performance reasons)</li>
- * </ul>
- *
  * @author Kuba Wolanin - Initial contribution
  */
 public class IvonaCloudImplementation implements IvonaCloudAPI {
+
+    static IvonaSpeechCloudClient speechCloud;
 
     private final Logger logger = LoggerFactory.getLogger(IvonaCloudImplementation.class);
 
@@ -60,37 +57,10 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
         return supportedAudioFormats;
     }
 
-    /**
-     * Will support only 3 locales for the moment.
-     */
     private static Set<Locale> getSupportedLocales() {
         Set<Locale> locales = new HashSet<Locale>();
-        locales.add(Locale.forLanguageTag("ca-es"));
-        locales.add(Locale.forLanguageTag("da-dk"));
-        locales.add(Locale.forLanguageTag("de-de"));
-        locales.add(Locale.forLanguageTag("en-au"));
-        locales.add(Locale.forLanguageTag("en-ca"));
-        locales.add(Locale.forLanguageTag("en-gb"));
-        locales.add(Locale.forLanguageTag("en-in"));
-        locales.add(Locale.forLanguageTag("en-us"));
-        locales.add(Locale.forLanguageTag("es-es"));
-        locales.add(Locale.forLanguageTag("es-mx"));
-        locales.add(Locale.forLanguageTag("fi-fi"));
-        locales.add(Locale.forLanguageTag("fr-ca"));
-        locales.add(Locale.forLanguageTag("fr-fr"));
-        locales.add(Locale.forLanguageTag("it-it"));
-        locales.add(Locale.forLanguageTag("ja-jp"));
-        locales.add(Locale.forLanguageTag("ko-kr"));
-        locales.add(Locale.forLanguageTag("nb-no"));
-        locales.add(Locale.forLanguageTag("nl-nl"));
         locales.add(Locale.forLanguageTag("pl-pl"));
-        locales.add(Locale.forLanguageTag("pt-br"));
-        locales.add(Locale.forLanguageTag("pt-pt"));
-        locales.add(Locale.forLanguageTag("ru-ru"));
-        locales.add(Locale.forLanguageTag("sv-se"));
-        locales.add(Locale.forLanguageTag("zh-cn"));
-        locales.add(Locale.forLanguageTag("zh-hk"));
-        locales.add(Locale.forLanguageTag("zh-tw"));
+        // TODO listVoices ?
         return locales;
     }
 
@@ -99,9 +69,6 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
         return supportedLocales;
     }
 
-    /**
-     * Will support only a default voice with good quality for each locale.
-     */
     private static Set<String> getSupportedVoices() {
         // one default voice for every locale
         Set<String> voices = new HashSet<String>();
@@ -136,18 +103,22 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
      * dependencies.
      */
     @Override
-    public InputStream getTextToSpeech(String apiKey, String apiSecret, String text, String locale, String audioFormat)
-            throws IOException {
-        String url = createURL(apiKey, apiSecret, text, locale, audioFormat);
+    public InputStream getTextToSpeech(String accessKey, String secretKey, String endpoint, String text, String locale,
+            String audioFormat) throws IOException {
+
+        speechCloud = new IvonaSpeechCloudClient(
+                new ClasspathPropertiesFileCredentialsProvider("resources/IvonaCredentials.properties"));
+
+        speechCloud.setEndpoint("https://" + endpoint);
+
+        String url = createURL(accessKey, secretKey, text, locale, audioFormat);
         logger.debug("Call {}", url);
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 
         connection.setRequestMethod("POST");
 
-        // we will check return codes. The service will ALWAYS return a HTTP
-        // 200, but for error messages, it will return a text/plain format and
-        // the error message in body
         int status = connection.getResponseCode();
+
         if (HttpURLConnection.HTTP_OK != status) {
             logger.error("Call {} returned HTTP {}", url, status);
             throw new IOException("Could not read from service: HTTP code" + status);
@@ -184,7 +155,7 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
      *
      * It is in package scope to be accessed by tests.
      */
-    String createURL(String apiKey, String apiSecret, String text, String locale, String audioFormat) {
+    String createURL(String accessKey, String secretKey, String text, String locale, String audioFormat) {
         String encodedMsg;
         try {
             encodedMsg = URLEncoder.encode(text, "UTF-8");
@@ -193,7 +164,11 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
             // fall through and use msg un-encoded
             encodedMsg = text;
         }
-        return "http://api.ivona.org/?key=" + apiKey + "&hl=" + locale + "&c=" + audioFormat
+
+        // TODO CreateSpeech generate URL
+        // https://github.com/IvonaSoftware/ivona-speechcloud-sdk-java/blob/master/src/samples/IvonaSpeechCloudCreateSpeech/SampleIvonaSpeechCloudGetCreateSpeechURL.java
+
+        return "http://api.ivona.org/?key=" + accessKey + "&hl=" + locale + "&c=" + audioFormat
                 + "&f=44khz_16bit_mono&src=" + encodedMsg;
     }
 

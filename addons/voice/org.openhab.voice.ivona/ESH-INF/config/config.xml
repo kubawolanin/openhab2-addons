@@ -6,16 +6,26 @@
         http://eclipse.org/smarthome/schemas/config-description-1.0.0.xsd">
 
 	<config-description uri="voice:ivona">
-		<parameter name="apiKey" type="text" required="true">
+		<parameter name="accessKey" type="text" required="true">
 			<label>Ivona API Key</label>
 			<description>The API Key to get access to Ivona Speech Cloud. You need to register with at least a free account to get an API key.
 			</description>
 		</parameter>
-		<parameter name="apiSecret" type="text" required="true">
+		<parameter name="secretKey" type="text" required="true">
 			<label>Ivona API Secret</label>
 			<description>The API Secret to get access to Ivona Speech Cloud.
 			</description>
 		</parameter>
+        <parameter name="endpoint" type="text" required="true">
+            <label>Endpoint</label>
+            <description>Choose location nearest your device</description>
+            <options>
+				<option value="eu-west-1">EU, Dublin</option>
+				<option value="us-east-1">US East, N. Virginia</option>
+				<option value="us-west-2">US West, Oregon</option>
+            </options>
+            <default>eu-west-1</default>
+        </parameter>
 	</config-description>
 
 </config-description:config-descriptions>

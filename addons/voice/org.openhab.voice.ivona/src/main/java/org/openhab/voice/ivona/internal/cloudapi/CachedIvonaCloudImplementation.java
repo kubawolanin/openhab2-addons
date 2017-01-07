@@ -46,8 +46,8 @@ public class CachedIvonaCloudImplementation extends IvonaCloudImplementation {
         }
     }
 
-    public File getTextToSpeechAsFile(String apiKey, String apiSecret, String text, String locale, String audioFormat)
-            throws IOException {
+    public File getTextToSpeechAsFile(String accessKey, String secretKey, String endpoint, String text, String locale,
+            String audioFormat) throws IOException {
         String fileNameInCache = getUniqeFilenameForText(text, locale);
         // check if in cache
         File audioFileInCache = new File(cacheFolder, fileNameInCache + ".mp3");
@@ -56,7 +56,7 @@ public class CachedIvonaCloudImplementation extends IvonaCloudImplementation {
         }
 
         // if not in cache, get audio data and put to cache
-        try (InputStream is = super.getTextToSpeech(apiKey, apiSecret, text, locale, audioFormat);
+        try (InputStream is = super.getTextToSpeech(accessKey, secretKey, endpoint, text, locale, audioFormat);
                 FileOutputStream fos = new FileOutputStream(audioFileInCache);) {
             copyStream(is, fos);
             // write text to file for transparency too
@@ -77,7 +77,7 @@ public class CachedIvonaCloudImplementation extends IvonaCloudImplementation {
     /**
      * Gets a unique filename for a give text, by creating a MD5 hash of it. It
      * will be preceded by the locale.
-     * 
+     *
      * Sample: "en-US_00a2653ac5f77063bc4ea2fee87318d3"
      */
     String getUniqeFilenameForText(String text, String locale) {

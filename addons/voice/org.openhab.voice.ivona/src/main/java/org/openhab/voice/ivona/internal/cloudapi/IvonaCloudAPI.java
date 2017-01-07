@@ -25,7 +25,7 @@ public interface IvonaCloudAPI {
 
     /**
      * Get all supported locales by the TTS service.
-     * 
+     *
      * @return A set of @{link {@link Locale} supported
      */
     Set<Locale> getAvailableLocales();
@@ -34,21 +34,21 @@ public interface IvonaCloudAPI {
      * Get all supported audio formats by the TTS service. This includes MP3,
      * WAV and more audio formats as used in APIs. About supported audio
      * formats, see {@link AudioFormat}
-     * 
+     *
      * @return A set of all audio formats supported
      */
     Set<String> getAvailableAudioFormats();
 
     /**
      * Get all supported voices.
-     * 
+     *
      * @return A set of voice names supported
      */
     Set<String> getAvailableVoices();
 
     /**
      * Get all supported voices for a specified locale.
-     * 
+     *
      * @param locale
      *            the locale to get all voices for
      * @return A set of voice names supported
@@ -57,11 +57,13 @@ public interface IvonaCloudAPI {
 
     /**
      * Get the given text in specified locale and audio format as input stream.
-     * 
-     * @param apiKey
+     *
+     * @param accessKey
      *            the API key to use for the cloud service
-     * @param apiSecret
-     *            the API key to use for the cloud service
+     * @param secretKey
+     *            the API Secret to use for the cloud service
+     * @param endpoint
+     *            the end point receiving requests
      * @param text
      *            the text to translate into speech
      * @param locale
@@ -73,6 +75,6 @@ public interface IvonaCloudAPI {
      *             will be raised if the audio data can not be retrieved from
      *             cloud service
      */
-    InputStream getTextToSpeech(String apiKey, String apiSecret, String text, String locale, String audioFormat)
-            throws IOException;
+    InputStream getTextToSpeech(String accessKey, String secretKey, String endpoint, String text, String locale,
+            String audioFormat) throws IOException;
 }
