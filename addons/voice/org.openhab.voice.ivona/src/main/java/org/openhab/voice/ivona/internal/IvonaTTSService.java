@@ -105,7 +105,7 @@ public class IvonaTTSService implements TTSService {
         logger.debug("Synthesize '{}' for voice '{}' in format {}", text, voice.getUID(), requestedFormat);
         // Validate known API key
         if (this.accessKey == null) {
-            throw new TTSException("Missing API key, configure it first before using");
+            throw new TTSException("Missing API access key, configure it first before using");
         }
         if (this.secretKey == null) {
             throw new TTSException("Missing API Secret, configure it first before using");

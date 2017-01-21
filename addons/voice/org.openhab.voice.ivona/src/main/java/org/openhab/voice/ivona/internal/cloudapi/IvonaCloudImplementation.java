@@ -21,11 +21,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.smarthome.core.audio.AudioFormat;
+import org.openhab.voice.ivona.internal.IvonaCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ivonacloud.aws.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.ivonacloud.services.tts.IvonaSpeechCloudClient;
+import com.ivonacloud.services.tts.model.CreateSpeechRequest;
+import com.ivonacloud.services.tts.model.Input;
+import com.ivonacloud.services.tts.model.Voice;
 
 /**
  * This class implements the Cloud service from Ivona. For more information,
@@ -106,12 +109,23 @@ public class IvonaCloudImplementation implements IvonaCloudAPI {
     public InputStream getTextToSpeech(String accessKey, String secretKey, String endpoint, String text, String locale,
             String audioFormat) throws IOException {
 
-        speechCloud = new IvonaSpeechCloudClient(
-                new ClasspathPropertiesFileCredentialsProvider("resources/IvonaCredentials.properties"));
-
+        speechCloud = new IvonaSpeechCloudClient(new IvonaCredentials(accessKey, secretKey));
         speechCloud.setEndpoint("https://" + endpoint);
 
-        String url = createURL(accessKey, secretKey, text, locale, audioFormat);
+        // String url = createURL(accessKey, secretKey, text, locale, audioFormat);
+
+        CreateSpeechRequest createSpeechRequest = new CreateSpeechRequest();
+        Input input = new Input();
+        Voice voice = new Voice();
+
+        voice.setName("Salli");
+        input.setData(text);
+
+        createSpeechRequest.setInput(input);
+        createSpeechRequest.setVoice(voice);
+
+        String url = speechCloud.getCreateSpeechUrl(createSpeechRequest);
+
         logger.debug("Call {}", url);
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 
