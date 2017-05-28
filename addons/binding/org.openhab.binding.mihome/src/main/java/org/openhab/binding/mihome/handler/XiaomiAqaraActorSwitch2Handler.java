@@ -18,7 +18,7 @@ import org.eclipse.smarthome.core.types.Command;
 import com.google.gson.JsonObject;
 
 /**
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
 
@@ -61,14 +61,6 @@ public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
 
     @Override
     void parseWriteAck(JsonObject data) {
-        /*
-         * As of 2017/04/22 and Firmware 1.4.1.145, write_ack does not get us any valuable informations.
-         * When writing a command to the switch, it reports the actual state in "write_ack" and then
-         * reports the changed value in "report" - as the state gets tracked by parsing reports and heartbeats,
-         * write_ack can be ignored
-         * otherwise put in:
-         * parseReport(data);
-         */
-        return;
+        parseReport(data);
     }
 }

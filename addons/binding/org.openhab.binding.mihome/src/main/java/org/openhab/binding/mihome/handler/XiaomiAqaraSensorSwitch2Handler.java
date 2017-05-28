@@ -15,7 +15,7 @@ import org.eclipse.smarthome.core.thing.Thing;
 import com.google.gson.JsonObject;
 
 /**
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class XiaomiAqaraSensorSwitch2Handler extends XiaomiSensorBaseHandler {
 

@@ -46,7 +46,7 @@ import com.google.common.collect.Sets;
  * handlers.
  *
  * @author Patrick Boos - Initial contribution
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class XiaomiHandlerFactory extends BaseThingHandlerFactory {
 

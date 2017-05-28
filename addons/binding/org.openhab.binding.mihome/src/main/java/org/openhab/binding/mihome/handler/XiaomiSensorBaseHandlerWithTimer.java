@@ -23,7 +23,7 @@ import org.eclipse.smarthome.core.types.State;
  * which use a timer to update a certain channel. The user can configure the timer via an item
  * value.
  *
- * @author Dimalo
+ * @author Dieter Schmidt
  *
  */
 public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseHandler {

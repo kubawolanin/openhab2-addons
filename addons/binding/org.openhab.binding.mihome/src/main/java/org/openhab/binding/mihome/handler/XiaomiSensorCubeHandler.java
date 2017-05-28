@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 
 /**
  * @author Patrick Boos - Initial contribution
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class XiaomiSensorCubeHandler extends XiaomiSensorBaseHandler {
 

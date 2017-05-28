@@ -51,22 +51,4 @@
 		</state>
 	</channel-type>
 
-	<channel-type id="voltage" advanced="true">
-		<item-type>Number</item-type>
-		<label>Battery Voltage</label>
-		<category>Battery Voltage</category>
-		<state pattern="%d mV" readOnly="true"></state>
-	</channel-type>
-
-	<channel-type id="batteryLevel" advanced="true">
-		<kind>trigger</kind>
-		<label>Low Battery Level</label>
-		<description>Triggers LOW event when voltage is below 2800 mV</description>
-		<event>
-			<options>
-				<option value="LOW">low</option>
-			</options>
-		</event>
-	</channel-type>
-
 </thing:thing-descriptions>

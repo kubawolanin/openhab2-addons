@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
 /**
  * Takes care of the discovery communication with the MiHome gateway
  *
- * @author Dimalo
+ * @author Dieter Schmidt
  *
  */
 public class XiaomiDiscoverySocket extends XiaomiSocket {

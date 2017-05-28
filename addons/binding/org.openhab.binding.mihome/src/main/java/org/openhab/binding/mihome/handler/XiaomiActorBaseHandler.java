@@ -13,7 +13,7 @@ import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
 
 /**
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public abstract class XiaomiActorBaseHandler extends XiaomiDeviceBaseHandler {
 
@@ -24,6 +24,5 @@ public abstract class XiaomiActorBaseHandler extends XiaomiDeviceBaseHandler {
     @Override
     void execute(ChannelUID channelUID, Command command) {
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
-        return;
     }
 }

@@ -3,18 +3,17 @@
 	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
-	<thing-type id="86sw1">
+	<thing-type id="curtain">
 		<supported-bridge-type-refs>
 			<bridge-type-ref id="bridge" />
 		</supported-bridge-type-refs>
 
-		<label>Xiaomi Aqara 1 Channel Smart Light Control</label>
-		<description>Battery powered Aqara Switch with 1 Channel</description>
+		<label>Xiaomi Mi Smart Curtain</label>
+		<description>Allows you to control the curtain (open/close/stop/auto) and read the current status of it.</description>
 
 		<channels>
-			<channel id="sw1" typeId="sw1" />
-			<channel id="voltage" typeId="voltage" />
-			<channel id="batteryLevel" typeId="batteryLevel" />
+			<channel id="curtainControl" typeId="curtainControl" />
+			<channel id="curtainLevel" typeId="curtainLevel" />
 		</channels>
 
 		<config-description>
@@ -26,15 +25,15 @@
 		</config-description>
 	</thing-type>
 
-	<channel-type id="sw1">
-		<kind>trigger</kind>
-		<label>Button Event</label>
-		<event>
-			<options>
-				<option value="CLICK">click</option>
-				<option value="DOUBLE_CLICK">double click</option>
-			</options>
-		</event>
+	<channel-type id="curtainControl">
+		<item-type>Rollershutter</item-type>
+		<label>Curtain</label>
+	</channel-type>
+
+	<channel-type id="curtainLevel">
+		<item-type>Dimmer</item-type>
+		<label>Curtain level</label>
+		<state max="100" min="0" step="1" pattern="%d %%" readOnly="false"></state>
 	</channel-type>
 
 </thing:thing-descriptions>

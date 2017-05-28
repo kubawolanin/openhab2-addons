@@ -27,7 +27,7 @@ import com.google.gson.JsonParser;
  *
  *
  * @author Patrick Boos - Initial contribution
- * @author Dimalo - JavaDoc and clean code
+ * @author Dieter Schmidt - JavaDoc and clean code
  *
  */
 public abstract class XiaomiSocket {
@@ -150,7 +150,7 @@ public abstract class XiaomiSocket {
      * The thread, which waits for data on the {@link XiaomiSocket} and handles it, when received
      *
      * @author Patrick Boos - Initial contribution
-     * @author Dimalo - comments and synchronized block for callback instead of copy
+     * @author Dieter Schmidt - comments and synchronized block for callback instead of copy
      *
      */
     class ReceiverThread extends Thread {

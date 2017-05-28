@@ -18,7 +18,7 @@ import org.eclipse.smarthome.core.types.Command;
 import com.google.gson.JsonObject;
 
 /**
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
 

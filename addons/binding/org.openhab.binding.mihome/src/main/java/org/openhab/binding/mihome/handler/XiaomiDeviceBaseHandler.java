@@ -39,15 +39,16 @@ import com.google.gson.JsonParser;
  *
  * @author Patrick Boos - Initial contribution
  * @author Kuba Wolanin - Added voltage and low battery report
- * @author Dimalo - Added cube rotation, heartbeat and voltage handling, configurable window and motion delay, Aqara
+ * @author Dieter Schmidt - Added cube rotation, heartbeat and voltage handling, configurable window and motion delay,
+ *         Aqara
  *         switches
  */
 public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implements XiaomiItemUpdateListener {
 
-    public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = new HashSet<>(
-            Arrays.asList(THING_TYPE_GATEWAY, THING_TYPE_SENSOR_HT, THING_TYPE_SENSOR_MOTION, THING_TYPE_SENSOR_SWITCH,
-                    THING_TYPE_SENSOR_MAGNET, THING_TYPE_SENSOR_CUBE, THING_TYPE_SENSOR_AQARA1,
-                    THING_TYPE_SENSOR_AQARA2, THING_TYPE_ACTOR_AQARA1, THING_TYPE_ACTOR_AQARA2, THING_TYPE_ACTOR_PLUG));
+    public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = new HashSet<>(Arrays.asList(THING_TYPE_GATEWAY,
+            THING_TYPE_SENSOR_HT, THING_TYPE_SENSOR_MOTION, THING_TYPE_SENSOR_SWITCH, THING_TYPE_SENSOR_MAGNET,
+            THING_TYPE_SENSOR_CUBE, THING_TYPE_SENSOR_AQARA1, THING_TYPE_SENSOR_AQARA2, THING_TYPE_ACTOR_AQARA1,
+            THING_TYPE_ACTOR_AQARA2, THING_TYPE_ACTOR_PLUG, THING_TYPE_ACTOR_CURTAIN));
 
     private static final long ONLINE_TIMEOUT = 2 * 60 * 60 * 1000; // 2 hours
 

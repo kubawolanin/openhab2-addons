@@ -5,22 +5,37 @@ This binding allows your openHAB to communicate with the Xiaomi Smart Home Suite
 In order to connect the Gateway, you need to install the MiHome app 
 from the [Google Play](https://play.google.com/store/apps/details?id=com.xiaomi.smarthome) or [AppStore](https://itunes.apple.com/app/mi-home-xiaomi-for-your-smarthome/id957323480).
 
+## Supported devices
+
+* Xiaomi Smart Gateway v2 (with radio support) 
+* Xiaomi Smart Temperature and Humidity Sensor (round one)
+* Xiaomi Smart Door/Window Sensor (round one)
+* Xiaomi Wireless Switch (round one)
+* Xiaomi Motion Sensor / IR Human Body sensor
+* Xiaomi Smart Plug
+* Xiaomi Smart Magic Cube
+* Xiaomi Aqara ZigBee Wired Wall Switch (1 and 2 buttons)
+* Xiaomi Aqara ZigBee Wireless Wall Switch (1 and 2 buttons)
+* Xiaomi Aqara Smart Curtain
+* Xiaomi Mijia Honeywell Gas Alarm Detector
+* Xiaomi Mijia Honeywell Fire Alarm Detector
+
 ## Setup
 
 * Install the binding
 * Setup Gateway to be discoverable
 
     1. Add Gateway 2 or 3 to your WiFi Network
-    1. Install Mi Home app from [Google Play](https://play.google.com/store/apps/details?id=com.xiaomi.smarthome) or [AppStore](https://itunes.apple.com/app/mi-home-xiaomi-for-your-smarthome/id957323480) (your phone may need to be changed to English language first)
+    1. Install MiHome app from [Google Play](https://play.google.com/store/apps/details?id=com.xiaomi.smarthome) or [AppStore](https://itunes.apple.com/app/mi-home-xiaomi-for-your-smarthome/id957323480) (your phone may need to be changed to English language first)
     1. Set your region to Mainland China under Settings -> Locale (seems to be required)
-    1. Update gateway (maybe multiple times)
+    1. Update gateway to the latest firmware (note that update window may pop up sequentially)
     1. Enable developer mode:
 
-        1. Select your Gateway in Mi Home
-        1. Go to the "..." menu and click "About"
+        1. Select your Gateway in the MiHome app
+        1. Go to the "..." menu on the top right corner and click "About"
         1. Tap the version number "Version : 2.XX" at the bottom of the screen repeatedly until you enable developer mode
-        1. You should now have 2 extra options listed in Chinese
-        1. Choose the first new option (fourth position in the menu or the longer text in Chinese)
+        1. You should now have 2 extra options listed: `local area network communication protocol` and `gateway information`
+        1. Choose `local area network communication protocol`
         1. Tap the toggle switch to enable LAN functions. Note down the developer key (something like: 91bg8zfkf9vd6uw7)
         1. Make sure you hit the OK button (to the right of the cancel button) to save your changes
 
@@ -43,8 +58,8 @@ There are two ways of connecting Xiaomi devices to the gateway:
     1. You'll hear confirmation message in Chinese 
     1. The device appears in openHAB thing Inbox
 
-* If you don't want to hear the chinese voice every time, you can disable it by setting the volume to minimum in the MiHome App (same for the blinking light)
-* The devices don't need an internet connection to be working after you have set up the developer mode BUT you won't be able to connect to them via App anymore - easiest way is to block their outgoing internet connection in your router
+* If you don't want to hear the Chinese voice every time, you can disable it by setting the volume to minimum in the MiHome App (same for the blinking light)
+* The devices don't need an Internet connection to be working after you have set up the developer mode BUT you won't be able to connect to them via App anymore - easiest way is to block their outgoing Internet connection in your router
 
 ## Important information
 
@@ -52,7 +67,7 @@ The binding requires port `9898` to not be used by any other service on the syst
 
 ## Full Example
 
-**xiaomi.items:**
+### xiaomi.items:
 
 ```
 // Xiaomi Gateway
@@ -112,7 +127,7 @@ Switch AqaraWallSwitch1 <switch> { channel="mihome:ctrl_neutral2:<ID>:sw1" }
 Switch AqaraWallSwitch2 <switch> { channel="mihome:ctrl_neutral2:<ID>:sw2" }
 ```
 
-**xiaomi.rules:**
+### xiaomi.rules:
 
 ```
 rule "Xiaomi Switch"
@@ -236,9 +251,20 @@ when
 then
     <ACTION>
 end
+
+rule "Play quiet knock-knock ringtone with the Xiaomi Gateway"
+when
+    // Item ExampleSwitch changed to ON
+then
+    sendCommand(Gateway_SoundVolume, 2)
+    sendCommand(Gateway_Sound, 11)
+    Thread::sleep(2000) /* wait for 2 seconds */
+    sendCommand(Gateway_Sound, 10000)
+    sendCommand(Gateway_SoundVolume, 0)
+end
 ```
 
-**xiaomi.sitemap**:
+### xiaomi.sitemap:
 
 ```
 // Selection for Xiaomi Gateway Sounds

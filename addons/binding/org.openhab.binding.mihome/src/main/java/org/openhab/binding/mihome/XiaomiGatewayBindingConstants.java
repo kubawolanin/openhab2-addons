@@ -15,7 +15,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
  * used across the whole binding.
  *
  * @author Patrick Boos - Initial contribution
- * @author Dimalo - added cube, gateway sound channels, window sensor alarm
+ * @author Dieter Schmidt - added cube, gateway sound channels, window sensor alarm
  */
 public class XiaomiGatewayBindingConstants {
 
@@ -35,6 +35,7 @@ public class XiaomiGatewayBindingConstants {
     public static final ThingTypeUID THING_TYPE_ACTOR_PLUG = new ThingTypeUID(BINDING_ID, "sensor_plug");
     public static final ThingTypeUID THING_TYPE_ACTOR_AQARA1 = new ThingTypeUID(BINDING_ID, "ctrl_neutral1");
     public static final ThingTypeUID THING_TYPE_ACTOR_AQARA2 = new ThingTypeUID(BINDING_ID, "ctrl_neutral2");
+    public static final ThingTypeUID THING_TYPE_ACTOR_CURTAIN = new ThingTypeUID(BINDING_ID, "curtain");
 
     // List of all Channel ids
     public static final String CHANNEL_VOLTAGE = "voltage";
@@ -75,6 +76,9 @@ public class XiaomiGatewayBindingConstants {
     public static final String CHANNEL_AQARA_CH0 = "sw1";
     public static final String CHANNEL_AQARA_CH1 = "sw2";
     public static final String CHANNEL_AQARA_DUAL_CH = "dual_sw";
+    // curtain
+    public static final String CHANNEL_CURTAIN_CONTROL = "curtainControl";
+    public static final String CHANNEL_CURTAIN_LEVEL = "curtainLevel";
 
     // Bridge config properties
     public static final String SERIAL_NUMBER = "serialNumber";

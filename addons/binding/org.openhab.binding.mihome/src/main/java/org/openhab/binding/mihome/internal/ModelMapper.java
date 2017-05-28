@@ -17,7 +17,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
  *
  * @author Patrick Boos - Initial contribution
  * @author Kuba Wolanin - Renamed labels
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class ModelMapper {
 

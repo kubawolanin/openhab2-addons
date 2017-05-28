@@ -27,7 +27,7 @@ import com.google.gson.JsonObject;
 
 /**
  * @author Patrick Boos - Initial contribution
- * @author Dimalo
+ * @author Dieter Schmidt
  */
 public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
 
@@ -103,8 +103,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     } else {
                         state = volumeItem.getState();
                     }
-                    int volume = (state instanceof DecimalType && state != null) ? ((DecimalType) state).intValue()
-                            : 50;
+                    int volume = state instanceof DecimalType ? ((DecimalType) state).intValue() : 50;
                     writeBridgeRingtone(((DecimalType) command).intValue(), volume);
                     updateState(CHANNEL_GATEWAY_SOUND_SWITCH, OnOffType.ON);
                 } else {
@@ -165,7 +164,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
         }
 
         State state = item.getState();
-        if (state != null && state instanceof HSBType) {
+        if (state instanceof HSBType) {
             return ((HSBType) state).getRGB() & 0xffffff;
         }
 
