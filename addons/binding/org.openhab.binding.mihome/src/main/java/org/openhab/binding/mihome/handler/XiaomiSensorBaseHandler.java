@@ -56,6 +56,6 @@ public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
 
     @Override
     void execute(ChannelUID channelUID, Command command) {
-        logger.error("Channel {} does not exist", channelUID);
+        logger.warn("Channel {} does not exist", channelUID);
     }
 }

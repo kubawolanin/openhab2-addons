@@ -33,22 +33,25 @@ public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
     @Override
     void execute(ChannelUID channelUID, Command command) {
         String status = command.toString().toLowerCase();
-        if (channelUID.getId().equals(CHANNEL_AQARA_CH0)) {
-            getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_0" }, new Object[] { status });
-        } else if (channelUID.getId().equals(CHANNEL_AQARA_CH1)) {
-            getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_1" }, new Object[] { status });
-        } else {
-            logger.error("Can't handle command {} on channel {}", command, channelUID);
+        switch (channelUID.getId()) {
+            case CHANNEL_AQARA_CH0:
+                getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_0" }, new Object[] { status });
+                break;
+            case CHANNEL_AQARA_CH1:
+                getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_1" }, new Object[] { status });
+                break;
+            default:
+                logger.error("Can't handle command {} on channel {}", command, channelUID);
         }
     }
 
     @Override
     void parseReport(JsonObject data) {
         if (data.has("channel_0")) {
-            boolean isOn = data.get("channel_0").getAsString().toLowerCase().equals("on");
+            boolean isOn = "on".equals(data.get("channel_0").getAsString().toLowerCase());
             updateState(CHANNEL_AQARA_CH0, isOn ? OnOffType.ON : OnOffType.OFF);
         } else if (data.has("channel_1")) {
-            boolean isOn = data.get("channel_1").getAsString().toLowerCase().equals("on");
+            boolean isOn = "on".equals(data.get("channel_1").getAsString().toLowerCase());
             updateState(CHANNEL_AQARA_CH1, isOn ? OnOffType.ON : OnOffType.OFF);
         }
     }

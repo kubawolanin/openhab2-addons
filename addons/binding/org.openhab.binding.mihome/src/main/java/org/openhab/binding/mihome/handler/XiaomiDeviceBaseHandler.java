@@ -144,36 +144,28 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
      * @param data
      */
     void parseReport(JsonObject data) {
-        logger.debug("Got report with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
-        return;
     }
 
     /**
      * @param data
      */
     void parseHeartbeat(JsonObject data) {
-        logger.debug("Got heartbeat with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
-        return;
     }
 
     /**
      * @param data
      */
     void parseReadAck(JsonObject data) {
-        logger.debug("Got read_ack with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
-        return;
     }
 
     /**
      * @param data
      */
     void parseWriteAck(JsonObject data) {
-        logger.debug("Got write_ack with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
-        return;
     }
 
     /**

@@ -34,14 +34,17 @@ public class XiaomiActorCurtainHandler extends XiaomiActorBaseHandler {
 
     @Override
     void execute(ChannelUID channelUID, Command command) {
-        if (channelUID.getId().equals(CHANNEL_CURTAIN_CONTROL)) {
-            String status = command.toString().toLowerCase();
-            getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "status" }, new Object[] { status });
-        } else if (channelUID.getId().equals(CHANNEL_CURTAIN_LEVEL)) {
-            String status = command.toString().toLowerCase();
-            getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "curtain_level" }, new Object[] { status });
-        } else {
-            logger.warn("Can't handle command {} on channel {}", command, channelUID);
+        String status = command.toString().toLowerCase();
+        switch (channelUID.getId()) {
+            case CHANNEL_CURTAIN_CONTROL:
+                getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "status" }, new Object[] { status });
+                break;
+            case CHANNEL_CURTAIN_LEVEL:
+                getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "curtain_level" },
+                        new Object[] { status });
+                break;
+            default:
+                logger.warn("Can't handle command {} on channel {}", command, channelUID);
         }
     }
 

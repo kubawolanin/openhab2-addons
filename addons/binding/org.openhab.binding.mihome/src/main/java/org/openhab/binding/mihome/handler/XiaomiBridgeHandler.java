@@ -127,9 +127,9 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
         updateDeviceStatus(sid);
         updateStatus(ThingStatus.ONLINE);
 
-        if (command.equals("heartbeat") && message.has("token")) {
+        if ("heartbeat".equals(command) && message.has("token")) {
             this.token = message.get("token").getAsString();
-        } else if (command.equals("get_id_list_ack")) {
+        } else if ("get_id_list_ack".equals(command)) {
             JsonArray devices = PARSER.parse(message.get("data").getAsString()).getAsJsonArray();
             for (JsonElement deviceId : devices) {
                 String device = deviceId.getAsString();
@@ -138,9 +138,9 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
             // as well get gateway status
             sendCommandToBridge("read", getGatewaySid());
             return;
-        } else if (command.equals("read_ack")) {
+        } else if ("read_ack".equals(command)) {
             logger.debug("Device {} honored read request", sid);
-        } else if (command.equals("write_ack")) {
+        } else if ("write_ack".equals(command)) {
             logger.debug("Device {} honored write request", sid);
         }
         notifyListeners(command, message);

@@ -34,7 +34,7 @@ public class XiaomiActorPlugHandler extends XiaomiActorBaseHandler {
 
     @Override
     void execute(ChannelUID channelUID, Command command) {
-        if (channelUID.getId().equals(CHANNEL_POWER_ON)) {
+        if (CHANNEL_POWER_ON.equals(channelUID.getId())) {
             String status = command.toString().toLowerCase();
             getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "status" }, new Object[] { status });
         } else {
@@ -62,7 +62,7 @@ public class XiaomiActorPlugHandler extends XiaomiActorBaseHandler {
      */
     private void getStatusFromData(JsonObject data) {
         if (data.has("status")) {
-            boolean isOn = data.get("status").getAsString().equals("on");
+            boolean isOn = "on".equals(data.get("status").getAsString());
             updateState(CHANNEL_POWER_ON, isOn ? OnOffType.ON : OnOffType.OFF);
             if (!isOn) {
                 updateState(CHANNEL_IN_USE, OnOffType.OFF);

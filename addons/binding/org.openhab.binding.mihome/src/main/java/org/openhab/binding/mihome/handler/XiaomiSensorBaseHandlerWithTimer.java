@@ -33,7 +33,7 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
     private int defaultTimer;
     private int minTimer;
     private Integer timerSetpoint;
-    private final String SETPOINT_CHANNEL;
+    private final String setpointChannel;
     boolean timerIsRunning;
     private Timer trigger = new Timer();
 
@@ -44,7 +44,7 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
         this.defaultTimer = defaultTimer;
         this.minTimer = minTimer;
         this.timerSetpoint = defaultTimer;
-        this.SETPOINT_CHANNEL = setpointChannel;
+        this.setpointChannel = setpointChannel;
     }
 
     class TimerAction extends TimerTask {
@@ -53,16 +53,8 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
             onTimer();
             timerIsRunning = false;
         }
-
-        /**
-         *
-         */
-
     };
 
-    /**
-     *
-     */
     synchronized void startTimer() {
         setTimerFromItemInSetpointChannel();
         cancelRunningTimer();
@@ -71,9 +63,6 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
         timerIsRunning = true;
     }
 
-    /**
-    *
-    */
     synchronized void cancelRunningTimer() {
         if (timerIsRunning) {
             trigger.cancel();
@@ -85,15 +74,12 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
 
     abstract void onTimer();
 
-    /**
-     * @param value
-     */
     void setTimerFromDecimalType(DecimalType value) {
         try {
             int newValue = value.intValue();
             timerSetpoint = newValue < minTimer ? minTimer : newValue;
             if (timerSetpoint == minTimer) {
-                updateState(SETPOINT_CHANNEL, new DecimalType(timerSetpoint));
+                updateState(setpointChannel, new DecimalType(timerSetpoint));
             }
         } catch (NumberFormatException e) {
             logger.debug("Cannot parse the value {} to an Integer", value);
@@ -101,11 +87,8 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
         }
     }
 
-    /**
-     *
-     */
     void setTimerFromItemInSetpointChannel() {
-        ChannelUID uid = this.thing.getChannel(SETPOINT_CHANNEL).getUID();
+        ChannelUID uid = this.thing.getChannel(setpointChannel).getUID();
         Set<Item> items = linkRegistry.getLinkedItems(uid);
         if (items.size() == 1) {
             State state = ((Item) items.toArray()[0]).getState();

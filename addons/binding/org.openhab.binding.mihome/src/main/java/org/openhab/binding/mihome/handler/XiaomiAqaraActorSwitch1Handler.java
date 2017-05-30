@@ -32,7 +32,7 @@ public class XiaomiAqaraActorSwitch1Handler extends XiaomiActorBaseHandler {
 
     @Override
     void execute(ChannelUID channelUID, Command command) {
-        if (channelUID.getId().equals(CHANNEL_AQARA_CH0)) {
+        if (CHANNEL_AQARA_CH0.equals(channelUID.getId())) {
             String status = command.toString().toLowerCase();
             getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_0" }, new Object[] { status });
         } else {
@@ -43,7 +43,7 @@ public class XiaomiAqaraActorSwitch1Handler extends XiaomiActorBaseHandler {
     @Override
     void parseReport(JsonObject data) {
         if (data.has("channel_0")) {
-            boolean isOn = data.get("channel_0").getAsString().toLowerCase().equals("on");
+            boolean isOn = "on".equals(data.get("channel_0").getAsString().toLowerCase());
             updateState(CHANNEL_AQARA_CH0, isOn ? OnOffType.ON : OnOffType.OFF);
         }
     }

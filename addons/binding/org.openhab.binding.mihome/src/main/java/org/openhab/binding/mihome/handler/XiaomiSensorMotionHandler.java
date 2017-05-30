@@ -38,7 +38,7 @@ public class XiaomiSensorMotionHandler extends XiaomiSensorBaseHandlerWithTimer 
 
     @Override
     void parseReport(JsonObject data) {
-        boolean hasMotion = data.has("status") && data.get("status").getAsString().equals("motion");
+        boolean hasMotion = data.has("status") && "motion".equals(data.get("status").getAsString());
         synchronized (this) {
             if (hasMotion) {
                 updateState(CHANNEL_MOTION, OnOffType.ON);
@@ -50,7 +50,7 @@ public class XiaomiSensorMotionHandler extends XiaomiSensorBaseHandlerWithTimer 
 
     @Override
     void execute(ChannelUID channelUID, Command command) {
-        if (channelUID.getId().equals(CHANNEL_MOTION_OFF_TIMER)) {
+        if (CHANNEL_MOTION_OFF_TIMER.equals(channelUID.getId())) {
             if (command != null && command instanceof DecimalType) {
                 setTimerFromDecimalType((DecimalType) command);
             } else {
