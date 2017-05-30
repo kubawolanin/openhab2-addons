@@ -13,8 +13,8 @@
 
 		<channels>
 			<channel id="sw1" typeId="sw1" />
-			<channel id="voltage" typeId="voltage" />
-			<channel id="batteryLevel" typeId="batteryLevel" />
+			<channel id="battery-level" typeId="system.battery-level" />
+			<channel id="low-battery" typeId="system.low-battery" />
 		</channels>
 
 		<config-description>

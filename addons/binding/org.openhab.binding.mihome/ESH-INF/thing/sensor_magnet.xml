@@ -16,8 +16,8 @@
 			<channel id="lastOpened" typeId="lastOpened" />
 			<channel id="isOpenAlarmTimer" typeId="isOpenAlarmTimer" />
 			<channel id="isOpenAlarm" typeId="isOpenAlarm" />
-			<channel id="voltage" typeId="voltage" />
-			<channel id="batteryLevel" typeId="batteryLevel" />
+            <channel id="battery-level" typeId="system.battery-level" />
+            <channel id="low-battery" typeId="system.low-battery" />
 		</channels>
 
 		<config-description>
