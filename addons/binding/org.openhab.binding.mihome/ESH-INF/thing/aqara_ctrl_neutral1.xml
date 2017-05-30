@@ -12,7 +12,7 @@
 		<description>Mains powered Aqara Switch with 1 controllable Channel</description>
 
 		<channels>
-			<channel id="sw1" typeId="sw1" />
+			<channel id="sw1" typeId="sw1-btn" />
 		</channels>
 
 		<config-description>
@@ -23,11 +23,4 @@
 			</parameter>
 		</config-description>
 	</thing-type>
-
-	<channel-type id="sw1">
-		<item-type>Switch</item-type>
-		<label>Button</label>
-		<description>The pushbutton on the switch.</description>
-	</channel-type>
-
 </thing:thing-descriptions>
