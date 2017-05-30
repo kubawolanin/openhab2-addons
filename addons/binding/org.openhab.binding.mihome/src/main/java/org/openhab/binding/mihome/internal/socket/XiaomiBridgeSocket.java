@@ -45,7 +45,7 @@ public class XiaomiBridgeSocket extends XiaomiSocket {
         socketReceiveThread = new ReceiverThread();
         socketReceiveThread.start();
         if (socket != null) {
-            openSockets.add(this);
+            openSockets.put(port, this);
         }
     }
 }

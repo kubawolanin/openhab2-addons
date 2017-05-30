@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ public abstract class XiaomiSocket {
 
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-    static ArrayList<XiaomiSocket> openSockets = new ArrayList<XiaomiSocket>();
+    static ConcurrentHashMap<Integer, XiaomiSocket> openSockets = new ConcurrentHashMap<Integer, XiaomiSocket>();
 
     int port = 0;
     DatagramSocket socket;
@@ -62,7 +62,6 @@ public abstract class XiaomiSocket {
      */
     public XiaomiSocket(int port) {
         this.port = port;
-
         setupSocket();
     }
 
@@ -78,6 +77,7 @@ public abstract class XiaomiSocket {
             }
             if (socket != null) {
                 socket.close();
+                openSockets.remove(port);
                 logger.debug("Socket closed");
                 socket = null;
             }
@@ -142,7 +142,7 @@ public abstract class XiaomiSocket {
     /**
      * @return - a list of already open sockets
      */
-    public static ArrayList<XiaomiSocket> getOpenSockets() {
+    public static ConcurrentHashMap<Integer, XiaomiSocket> getOpenSockets() {
         return openSockets;
     }
 
@@ -173,6 +173,8 @@ public abstract class XiaomiSocket {
                 while (true) {
                     logger.trace("Thread waiting for data on port {}", port);
                     socket.receive(dgram);
+                    InetAddress address = dgram.getAddress();
+                    logger.debug("Received Datagram from Address {}", address);
                     String sentence = new String(dgram.getData(), 0, dgram.getLength());
                     JsonObject message = PARSER.parse(sentence).getAsJsonObject();
                     notifyAll(listeners, message);
