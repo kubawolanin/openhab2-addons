@@ -15,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Encrypts communication between openhab & xiaomi bridge (required by xiaomi).
  *
- * @author Ondřej Pečta - 29. 12. 2016
+ * @author Ondřej Pečta - 29. 12. 2016 - Contribution to Xiaomi MiHome Binding for OH 1.x
  */
 public class EncryptionHelper {
 
