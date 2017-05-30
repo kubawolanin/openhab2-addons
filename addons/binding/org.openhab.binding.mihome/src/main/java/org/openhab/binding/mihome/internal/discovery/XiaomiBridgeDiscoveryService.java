@@ -109,10 +109,5 @@ public class XiaomiBridgeDiscoveryService extends AbstractDiscoveryService imple
         thingDiscovered(
                 DiscoveryResultBuilder.create(thingUID).withThingType(THING_TYPE_BRIDGE).withProperties(properties)
                         .withLabel("Xiaomi Gateway").withRepresentationProperty(SERIAL_NUMBER).build());
-
-        // DiscoveryResult discoveryResult = DiscoveryResultBuilder.create(thingUID).withThingType(thingTypeUID)
-        // .withProperties(properties).withBridge(bridgeUID).withLabel(light.getName()).build();
-        // thingDiscovered(discoveryResult);
-        // return new ThingUID(thingTypeUID, bridgeUID, light.getId());
     }
 }
