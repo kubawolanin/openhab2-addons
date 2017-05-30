@@ -22,6 +22,8 @@ import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
 import org.eclipse.smarthome.core.types.State;
 import org.openhab.binding.mihome.internal.ColorUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -32,6 +34,8 @@ import com.google.gson.JsonObject;
 public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
 
     private float lastBrightness = -1;
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiActorGatewayHandler.class);
 
     public XiaomiActorGatewayHandler(Thing thing) {
         super(thing);

@@ -13,6 +13,9 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Takes care of the discovery communication with the MiHome gateway
  *
@@ -22,6 +25,8 @@ import java.net.UnknownHostException;
 public class XiaomiDiscoverySocket extends XiaomiSocket {
 
     private static final int MCAST_PORT = 4321;
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiDiscoverySocket.class);
 
     public XiaomiDiscoverySocket() {
         super();

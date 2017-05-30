@@ -58,7 +58,7 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Collections.singleton(THING_TYPE_BRIDGE);
     private static final JsonParser PARSER = new JsonParser();
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    private final Logger logger = LoggerFactory.getLogger(XiaomiBridgeHandler.class);
 
     private List<XiaomiItemUpdateListener> itemListeners = new ArrayList<>();
     private List<XiaomiItemUpdateListener> itemDiscoveryListeners = new ArrayList<>();

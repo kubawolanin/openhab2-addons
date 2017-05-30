@@ -40,7 +40,7 @@ public abstract class XiaomiSocket {
     private static List<XiaomiSocketListener> listeners = new CopyOnWriteArrayList<>();
     private static final JsonParser PARSER = new JsonParser();
 
-    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    private final Logger logger = LoggerFactory.getLogger(XiaomiSocket.class);
 
     static ConcurrentHashMap<Integer, XiaomiSocket> openSockets = new ConcurrentHashMap<Integer, XiaomiSocket>();
 

@@ -37,13 +37,13 @@ import com.google.gson.JsonObject;
 public class XiaomiBridgeDiscoveryService extends AbstractDiscoveryService implements XiaomiSocketListener {
 
     private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Collections.singleton(THING_TYPE_BRIDGE);
-    private static final int DISCOVERY_TIMEOUT = 10;
+    private static final int DISCOVERY_TIMEOUT_SEC = 10;
 
-    private Logger logger = LoggerFactory.getLogger(XiaomiBridgeDiscoveryService.class);
+    private final Logger logger = LoggerFactory.getLogger(XiaomiBridgeDiscoveryService.class);
     private XiaomiDiscoverySocket socket;
 
     public XiaomiBridgeDiscoveryService() {
-        super(SUPPORTED_THING_TYPES, DISCOVERY_TIMEOUT, false);
+        super(SUPPORTED_THING_TYPES, DISCOVERY_TIMEOUT_SEC, false);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class XiaomiBridgeDiscoveryService extends AbstractDiscoveryService imple
             public void run() {
                 discoveryEndedLock.release();
             }
-        }, DISCOVERY_TIMEOUT, TimeUnit.SECONDS);
+        }, DISCOVERY_TIMEOUT_SEC, TimeUnit.SECONDS);
         try {
             discoveryEndedLock.acquire();
         } catch (InterruptedException e) {

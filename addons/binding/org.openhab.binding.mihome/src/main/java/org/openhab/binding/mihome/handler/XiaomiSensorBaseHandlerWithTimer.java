@@ -17,6 +17,8 @@ import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.State;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The {@link XiaomiSensorBaseHandlerWithTimer} is an abstract class for sensor devices
@@ -34,6 +36,8 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
     private final String SETPOINT_CHANNEL;
     boolean timerIsRunning;
     private Timer trigger = new Timer();
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiSensorBaseHandlerWithTimer.class);
 
     public XiaomiSensorBaseHandlerWithTimer(Thing thing, int defaultTimer, int minTimer, String setpointChannel) {
         super(thing);

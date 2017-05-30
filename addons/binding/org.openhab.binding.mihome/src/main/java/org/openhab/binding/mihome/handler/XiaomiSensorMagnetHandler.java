@@ -16,6 +16,8 @@ import org.eclipse.smarthome.core.library.types.OpenClosedType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -27,6 +29,8 @@ public class XiaomiSensorMagnetHandler extends XiaomiSensorBaseHandlerWithTimer 
 
     private static final int DEFAULT_TIMER = 300;
     private static final int MIN_TIMER = 30;
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiSensorMagnetHandler.class);
 
     public XiaomiSensorMagnetHandler(Thing thing) {
         super(thing, DEFAULT_TIMER, MIN_TIMER, CHANNEL_OPEN_ALARM_TIMER);

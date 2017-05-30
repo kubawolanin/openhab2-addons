@@ -12,17 +12,12 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Encrypts communication between openhab & xiaomi bridge (required by xiaomi).
  *
  * @author Ondřej Pečta - 29. 12. 2016
  */
 public class EncryptionHelper {
-
-    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     protected static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
     protected static final byte[] IV = parseHexBinary("17996D093D28DDB3BA695A2E6F58562E");

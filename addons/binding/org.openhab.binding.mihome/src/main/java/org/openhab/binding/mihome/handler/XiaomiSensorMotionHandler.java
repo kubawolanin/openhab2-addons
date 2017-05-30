@@ -16,6 +16,8 @@ import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -27,6 +29,8 @@ public class XiaomiSensorMotionHandler extends XiaomiSensorBaseHandlerWithTimer 
 
     private static final int DEFAULT_TIMER = 120;
     private static final int MIN_TIMER = 5;
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiSensorMotionHandler.class);
 
     public XiaomiSensorMotionHandler(Thing thing) {
         super(thing, DEFAULT_TIMER, MIN_TIMER, CHANNEL_MOTION_OFF_TIMER);

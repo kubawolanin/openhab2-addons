@@ -14,6 +14,8 @@ import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -21,6 +23,8 @@ import com.google.gson.JsonObject;
  * @author Dieter Schmidt
  */
 public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiSensorBaseHandler.class);
 
     public XiaomiSensorBaseHandler(Thing thing) {
         super(thing);

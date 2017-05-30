@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * The {@link XiaomiDeviceBaseHandler} is responsible for handling commands, which are
@@ -51,7 +52,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
             THING_TYPE_SENSOR_CUBE, THING_TYPE_SENSOR_AQARA1, THING_TYPE_SENSOR_AQARA2, THING_TYPE_ACTOR_AQARA1,
             THING_TYPE_ACTOR_AQARA2, THING_TYPE_ACTOR_PLUG, THING_TYPE_ACTOR_CURTAIN));
 
-    private static final long ONLINE_TIMEOUT = 2 * 60 * 60 * 1000; // 2 hours
+    private static final long ONLINE_TIMEOUT_MILLIS = 2 * 60 * 60 * 1000; // 2 hours
 
     private JsonParser parser = new JsonParser();
 
@@ -59,7 +60,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
 
     String itemId;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    private final Logger logger = LoggerFactory.getLogger(XiaomiDeviceBaseHandler.class);
 
     public XiaomiDeviceBaseHandler(Thing thing) {
         super(thing);
@@ -104,9 +105,8 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
             try {
                 JsonObject data = parser.parse(message.get("data").getAsString()).getAsJsonObject();
                 parseCommand(command, data);
-            } catch (Exception e) {
-                logger.error("Unable to parse message {}", message);
-                logger.error("Caught Exeption {}", e);
+            } catch (JsonSyntaxException e) {
+                logger.warn("Unable to parse message as valid JSON: {}", message);
             }
             updateThingStatus();
         }
@@ -190,7 +190,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
                 ThingStatus bridgeStatus = (bridge == null) ? null : bridge.getStatus();
                 if (bridgeStatus == ThingStatus.ONLINE) {
                     ThingStatus itemStatus = getThing().getStatus();
-                    boolean hasItemActivity = getXiaomiBridgeHandler().hasItemActivity(itemId, ONLINE_TIMEOUT);
+                    boolean hasItemActivity = getXiaomiBridgeHandler().hasItemActivity(itemId, ONLINE_TIMEOUT_MILLIS);
                     ThingStatus newStatus = hasItemActivity ? ThingStatus.ONLINE : ThingStatus.OFFLINE;
 
                     if (!newStatus.equals(itemStatus)) {

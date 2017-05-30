@@ -14,6 +14,8 @@ import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.types.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -23,6 +25,8 @@ import com.google.gson.JsonObject;
  * @author Kuba Wolanin - initial contribution
  */
 public class XiaomiActorCurtainHandler extends XiaomiActorBaseHandler {
+
+    private final Logger logger = LoggerFactory.getLogger(XiaomiActorCurtainHandler.class);
 
     public XiaomiActorCurtainHandler(Thing thing) {
         super(thing);
