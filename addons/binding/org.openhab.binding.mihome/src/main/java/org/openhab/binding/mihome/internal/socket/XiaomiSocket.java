@@ -95,7 +95,7 @@ public abstract class XiaomiSocket {
             setupSocket();
         }
         if (!listeners.contains(listener)) {
-            logger.trace("Adding socket listener {}", listener.toString());
+            logger.trace("Adding socket listener {}", listener);
             listeners.add(listener);
         }
     }
@@ -125,7 +125,7 @@ public abstract class XiaomiSocket {
         try {
             byte[] sendData = message.getBytes("UTF-8");
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, address, port);
-            logger.trace("Sending message: {} to {}", message, address.toString());
+            logger.trace("Sending message: {} to {}", message, address);
             socket.send(sendPacket);
         } catch (IOException e) {
             logger.error("Sending error", e);

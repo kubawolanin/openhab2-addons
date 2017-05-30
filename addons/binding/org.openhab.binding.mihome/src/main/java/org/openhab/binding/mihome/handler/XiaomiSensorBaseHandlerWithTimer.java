@@ -92,7 +92,7 @@ public abstract class XiaomiSensorBaseHandlerWithTimer extends XiaomiSensorBaseH
                 updateState(SETPOINT_CHANNEL, new DecimalType(timerSetpoint));
             }
         } catch (NumberFormatException e) {
-            logger.debug("Cannot parse the value {} to an Integer", value.toString());
+            logger.debug("Cannot parse the value {} to an Integer", value);
             timerSetpoint = defaultTimer;
         }
     }

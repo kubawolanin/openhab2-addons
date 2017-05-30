@@ -26,6 +26,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
 import org.eclipse.smarthome.core.types.Command;
+import org.eclipse.smarthome.core.types.RefreshType;
 import org.openhab.binding.mihome.internal.XiaomiItemUpdateListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,27 +67,22 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
 
     @Override
     public void initialize() {
-        final String configItemId = (String) getConfig().get(ITEM_ID);
-        if (configItemId != null) {
-            itemId = configItemId;
-        }
-        // schedule init with random delay between 200ms and 1sec
+        itemId = (String) getConfig().get(ITEM_ID);
         scheduler.schedule(new Runnable() {
             @Override
             public void run() {
                 updateThingStatus();
             }
-        }, (int) Math.max((Math.random() * 1000), 200), TimeUnit.MILLISECONDS);
+        }, 100, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void dispose() {
-        logger.debug("Handler disposes. Unregistering listener.");
+        logger.debug("Handler disposes. Unregistering listener");
         if (itemId != null) {
-            XiaomiBridgeHandler bridgeHandler = getXiaomiBridgeHandler();
             if (bridgeHandler != null) {
                 bridgeHandler.unregisterItemListener(this);
-                this.bridgeHandler = null;
+                bridgeHandler = null;
             }
             itemId = null;
         }
@@ -95,7 +91,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.debug("Device {} on channel {} received command {}", itemId, channelUID, command);
-        if (command.toString().toLowerCase().equals("refresh")) {
+        if (command instanceof RefreshType) {
             return;
         }
         execute(channelUID, command);
@@ -104,7 +100,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
     @Override
     public void onItemUpdate(String sid, String command, JsonObject message) {
         if (itemId != null && itemId.equals(sid)) {
-            logger.debug("Item got update: {}", message.toString());
+            logger.debug("Item got update: {}", message);
             try {
                 JsonObject data = parser.parse(message.get("data").getAsString()).getAsJsonObject();
                 parseCommand(command, data);
@@ -148,7 +144,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
      * @param data
      */
     void parseReport(JsonObject data) {
-        logger.debug("Got report with data: {}", data.toString());
+        logger.debug("Got report with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
         return;
     }
@@ -157,7 +153,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
      * @param data
      */
     void parseHeartbeat(JsonObject data) {
-        logger.debug("Got heartbeat with data: {}", data.toString());
+        logger.debug("Got heartbeat with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
         return;
     }
@@ -166,7 +162,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
      * @param data
      */
     void parseReadAck(JsonObject data) {
-        logger.debug("Got read_ack with data: {}", data.toString());
+        logger.debug("Got read_ack with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
         return;
     }
@@ -175,7 +171,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
      * @param data
      */
     void parseWriteAck(JsonObject data) {
-        logger.debug("Got write_ack with data: {}", data.toString());
+        logger.debug("Got write_ack with data: {}", data);
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
         return;
     }

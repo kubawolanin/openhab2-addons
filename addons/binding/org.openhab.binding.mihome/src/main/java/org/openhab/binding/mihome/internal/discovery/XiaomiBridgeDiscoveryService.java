@@ -82,7 +82,7 @@ public class XiaomiBridgeDiscoveryService extends AbstractDiscoveryService imple
 
     @Override
     public void onDataReceived(JsonObject data) {
-        logger.debug("Received message {}", data.toString());
+        logger.debug("Received message {}", data);
         if (data.get("cmd").getAsString().equals("iam")) {
             getGatewayInfo(data);
         }
