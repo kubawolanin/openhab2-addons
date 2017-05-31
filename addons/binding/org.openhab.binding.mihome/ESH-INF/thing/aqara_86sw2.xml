@@ -15,8 +15,8 @@
 			<channel id="sw1" typeId="86sw1" />
 			<channel id="sw2" typeId="86sw2" />
 			<channel id="dual_sw" typeId="dual_sw" />
-            <channel id="battery-level" typeId="system.battery-level" />
-            <channel id="low-battery" typeId="system.low-battery" />
+			<channel id="batteryLevel" typeId="system.battery-level" />
+			<channel id="lowBattery" typeId="system.low-battery" />
 		</channels>
 
 		<config-description>

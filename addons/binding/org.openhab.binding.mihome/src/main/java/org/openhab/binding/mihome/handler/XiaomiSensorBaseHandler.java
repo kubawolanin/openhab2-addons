@@ -57,7 +57,8 @@ public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
     void calculateBatteryLevelFromVoltage(Integer voltage) {
         voltage = Math.min(VOLTAGE_MAX_MILLIVOLTS, voltage);
         voltage = Math.max(VOLTAGE_MIN_MILLIVOLTS, voltage);
-        Integer battLevel = (voltage / VOLTAGE_MAX_MILLIVOLTS - VOLTAGE_MIN_MILLIVOLTS) * 100;
+        Integer battLevel = (int) ((float) (voltage - VOLTAGE_MIN_MILLIVOLTS)
+                / (float) (VOLTAGE_MAX_MILLIVOLTS - VOLTAGE_MIN_MILLIVOLTS) * 100);
         updateState(CHANNEL_BATTERY_LEVEL, new DecimalType(battLevel));
         if (battLevel <= BATT_LEVEL_LOW) {
             updateState(CHANNEL_LOW_BATTERY, OnOffType.ON);
