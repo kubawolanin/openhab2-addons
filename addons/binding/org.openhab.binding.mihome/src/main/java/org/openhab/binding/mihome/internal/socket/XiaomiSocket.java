@@ -174,7 +174,7 @@ public abstract class XiaomiSocket {
                     logger.trace("Thread waiting for data on port {}", port);
                     socket.receive(dgram);
                     InetAddress address = dgram.getAddress();
-                    logger.debug("Received Datagram from Address {}", address);
+                    logger.debug("Received Datagram from Address {}", address.getHostAddress());
                     String sentence = new String(dgram.getData(), 0, dgram.getLength());
                     JsonObject message = PARSER.parse(sentence).getAsJsonObject();
                     notifyAll(listeners, message);

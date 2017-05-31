@@ -38,8 +38,8 @@ public class XiaomiGatewayBindingConstants {
     public static final ThingTypeUID THING_TYPE_ACTOR_CURTAIN = new ThingTypeUID(BINDING_ID, "curtain");
 
     // List of all Channel ids
-    public static final String CHANNEL_BATTERY_LEVEL = "battery-level";
-    public static final String CHANNEL_LOW_BATTERY = "low-battery";
+    public static final String CHANNEL_BATTERY_LEVEL = "batteryLevel";
+    public static final String CHANNEL_LOW_BATTERY = "lowBattery";
     // TH sensor
     public static final String CHANNEL_TEMPERATURE = "temperature";
     public static final String CHANNEL_HUMIDITY = "humidity";
