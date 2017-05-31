@@ -139,11 +139,26 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
 
     @Override
     void parseReport(JsonObject data) {
-        parseHeartbeat(data);
+        parseDefault(data);
     }
 
     @Override
     void parseHeartbeat(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReadAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseWriteAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseDefault(JsonObject data) {
         if (data.has("rgb")) {
             long rgb = data.get("rgb").getAsLong();
             updateState(CHANNEL_BRIGHTNESS, new PercentType((int) (((rgb >> 24) & 0xff))));
@@ -154,16 +169,6 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
             int illu = data.get("illumination").getAsInt();
             updateState(CHANNEL_ILLUMINATION, new DecimalType(illu));
         }
-    }
-
-    @Override
-    void parseReadAck(JsonObject data) {
-        parseHeartbeat(data);
-    }
-
-    @Override
-    void parseWriteAck(JsonObject data) {
-        parseHeartbeat(data);
     }
 
     private int getGatewayLightColor() {

@@ -45,6 +45,26 @@ public class XiaomiActorPlugHandler extends XiaomiActorBaseHandler {
 
     @Override
     void parseHeartbeat(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReadAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReport(JsonObject data) {
+        getStatusFromData(data);
+    }
+
+    @Override
+    void parseWriteAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseDefault(JsonObject data) {
         getStatusFromData(data);
         if (data.has("inuse")) {
             updateState(CHANNEL_IN_USE, (data.get("inuse").getAsInt() == 1) ? OnOffType.ON : OnOffType.OFF);
@@ -72,18 +92,4 @@ public class XiaomiActorPlugHandler extends XiaomiActorBaseHandler {
         }
     }
 
-    @Override
-    void parseReadAck(JsonObject data) {
-        parseHeartbeat(data);
-    }
-
-    @Override
-    void parseReport(JsonObject data) {
-        getStatusFromData(data);
-    }
-
-    @Override
-    void parseWriteAck(JsonObject data) {
-        parseHeartbeat(data);
-    }
 }

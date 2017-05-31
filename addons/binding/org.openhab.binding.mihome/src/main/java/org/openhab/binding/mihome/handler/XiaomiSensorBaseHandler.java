@@ -40,6 +40,16 @@ public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
      */
     @Override
     void parseHeartbeat(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReadAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseDefault(JsonObject data) {
         if (data.get("voltage") != null) {
             Integer voltage = data.get("voltage").getAsInt();
             calculateBatteryLevelFromVoltage(voltage);
@@ -65,11 +75,6 @@ public abstract class XiaomiSensorBaseHandler extends XiaomiDeviceBaseHandler {
         } else {
             updateState(CHANNEL_LOW_BATTERY, OnOffType.OFF);
         }
-    }
-
-    @Override
-    void parseReadAck(JsonObject data) {
-        parseHeartbeat(data);
     }
 
     @Override

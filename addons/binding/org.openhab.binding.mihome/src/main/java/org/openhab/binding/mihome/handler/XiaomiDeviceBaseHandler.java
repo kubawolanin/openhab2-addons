@@ -168,6 +168,8 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
         logger.debug("The binding does not parse this message yet, contact authors if you want it to");
     }
 
+    abstract void parseDefault(JsonObject data);
+
     /**
      * @param channelUID
      * @param command

@@ -50,23 +50,29 @@ public class XiaomiActorCurtainHandler extends XiaomiActorBaseHandler {
 
     @Override
     void parseHeartbeat(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReadAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReport(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseWriteAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseDefault(JsonObject data) {
         if (data.has("curtain_level")) {
             updateState(CHANNEL_CURTAIN_LEVEL, new DecimalType(data.get("curtain_level").getAsBigDecimal()));
         }
     }
 
-    @Override
-    void parseReadAck(JsonObject data) {
-        parseHeartbeat(data);
-    }
-
-    @Override
-    void parseReport(JsonObject data) {
-        parseHeartbeat(data);
-    }
-
-    @Override
-    void parseWriteAck(JsonObject data) {
-        parseHeartbeat(data);
-    }
 }

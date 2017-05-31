@@ -47,6 +47,26 @@ public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
 
     @Override
     void parseReport(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseHeartbeat(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseReadAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseWriteAck(JsonObject data) {
+        parseDefault(data);
+    }
+
+    @Override
+    void parseDefault(JsonObject data) {
         if (data.has("channel_0")) {
             boolean isOn = "on".equals(data.get("channel_0").getAsString().toLowerCase());
             updateState(CHANNEL_AQARA_CH0, isOn ? OnOffType.ON : OnOffType.OFF);
@@ -56,18 +76,4 @@ public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
         }
     }
 
-    @Override
-    void parseHeartbeat(JsonObject data) {
-        parseReport(data);
-    }
-
-    @Override
-    void parseReadAck(JsonObject data) {
-        parseReport(data);
-    }
-
-    @Override
-    void parseWriteAck(JsonObject data) {
-        parseReport(data);
-    }
 }
