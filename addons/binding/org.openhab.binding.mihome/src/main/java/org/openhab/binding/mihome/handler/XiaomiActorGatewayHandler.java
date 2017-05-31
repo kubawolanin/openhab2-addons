@@ -33,6 +33,9 @@ import com.google.gson.JsonObject;
  */
 public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
 
+    private static final int COLOR_TEMPERATURE_MAX = 6500;
+    private static final int COLOR_TEMPERATURE_MIN = 1700;
+
     private float lastBrightness = -1;
 
     private final Logger logger = LoggerFactory.getLogger(XiaomiActorGatewayHandler.class);
@@ -56,25 +59,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     }
                     return;
                 } else if (command instanceof OnOffType) {
-                    if (lastBrightness == -1) {
-                        try {
-                            Iterator<Item> iter = linkRegistry
-                                    .getLinkedItems(new ChannelUID(this.thing.getUID(), CHANNEL_BRIGHTNESS)).iterator();
-                            while (iter.hasNext()) {
-                                Item item = iter.next();
-                                if (item.getState() instanceof PercentType) {
-                                    lastBrightness = Float.parseFloat(item.getState().toString());
-                                    logger.debug("last brightness value found: {}", lastBrightness);
-                                    break;
-                                }
-                            }
-                            lastBrightness = lastBrightness == -1 || lastBrightness == 0 ? 1 : lastBrightness;
-                            logger.debug("No dimmer value for brightness found, adjusted to {}", lastBrightness);
-                        } catch (NumberFormatException e) {
-                            lastBrightness = 1;
-                            logger.debug("No last brightness value found - assuming 100");
-                        }
-                    }
+                    restoreBrightnessFromItem();
 
                     writeBridgeLightColor(getGatewayLightColor(), command == OnOffType.ON ? lastBrightness / 100 : 0);
                     return;
@@ -89,7 +74,8 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
             case CHANNEL_COLOR_TEMPERATURE:
                 if (command instanceof PercentType) {
                     PercentType colorTemperature = (PercentType) command;
-                    int kelvin = 48 * colorTemperature.intValue() + 1700;
+                    int kelvin = (COLOR_TEMPERATURE_MAX - COLOR_TEMPERATURE_MIN) / 100 * colorTemperature.intValue()
+                            + COLOR_TEMPERATURE_MIN;
                     int color = ColorUtil.getRGBFromK(kelvin);
                     writeBridgeLightColor(color, getGatewayLightBrightness());
                     updateState(CHANNEL_COLOR,
@@ -127,6 +113,28 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
         }
         // Only gets here, if no condition was met
         logger.warn("Can't handle command {} on channel {}", command, channelUID);
+    }
+
+    private void restoreBrightnessFromItem() {
+        if (lastBrightness == -1) {
+            try {
+                Iterator<Item> iter = linkRegistry
+                        .getLinkedItems(new ChannelUID(this.thing.getUID(), CHANNEL_BRIGHTNESS)).iterator();
+                while (iter.hasNext()) {
+                    Item item = iter.next();
+                    if (item.getState() instanceof PercentType) {
+                        lastBrightness = Float.parseFloat(item.getState().toString());
+                        logger.debug("last brightness value found: {}", lastBrightness);
+                        break;
+                    }
+                }
+                lastBrightness = lastBrightness == -1 || lastBrightness == 0 ? 1 : lastBrightness;
+                logger.debug("No dimmer value for brightness found, adjusted to {}", lastBrightness);
+            } catch (NumberFormatException e) {
+                lastBrightness = 1;
+                logger.debug("No last brightness value found - assuming 100");
+            }
+        }
     }
 
     @Override
