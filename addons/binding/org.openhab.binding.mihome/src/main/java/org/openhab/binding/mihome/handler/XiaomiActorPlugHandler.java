@@ -37,9 +37,10 @@ public class XiaomiActorPlugHandler extends XiaomiActorBaseHandler {
         if (CHANNEL_POWER_ON.equals(channelUID.getId())) {
             String status = command.toString().toLowerCase();
             getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "status" }, new Object[] { status });
-        } else {
-            logger.error("Can't handle command {} on channel {}", command, channelUID);
+            return;
         }
+        // Only gets here, if no condition was met
+        logger.warn("Can't handle command {} on channel {}", command, channelUID);
     }
 
     @Override

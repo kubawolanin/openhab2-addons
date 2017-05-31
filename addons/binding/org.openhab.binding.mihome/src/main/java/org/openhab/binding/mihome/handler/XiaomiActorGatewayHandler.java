@@ -49,11 +49,12 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     float newBright = ((PercentType) command).floatValue();
                     if (lastBrightness != newBright) {
                         lastBrightness = newBright;
-                        logger.debug("actual brigthness {}", lastBrightness);
+                        logger.debug("Set brigthness to {}", lastBrightness);
                         writeBridgeLightColor(getGatewayLightColor(), lastBrightness / 100);
                     } else {
                         logger.debug("Do not send this command, value {} already set", newBright);
                     }
+                    return;
                 } else if (command instanceof OnOffType) {
                     if (lastBrightness == -1) {
                         try {
@@ -76,13 +77,13 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     }
 
                     writeBridgeLightColor(getGatewayLightColor(), command == OnOffType.ON ? lastBrightness / 100 : 0);
-                } else {
-                    logger.error("Can't handle command {} on channel {}", command, channelUID);
+                    return;
                 }
                 break;
             case CHANNEL_COLOR:
                 if (command instanceof HSBType) {
                     writeBridgeLightColor(((HSBType) command).getRGB() & 0xffffff, getGatewayLightBrightness());
+                    return;
                 }
                 break;
             case CHANNEL_COLOR_TEMPERATURE:
@@ -93,8 +94,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     writeBridgeLightColor(color, getGatewayLightBrightness());
                     updateState(CHANNEL_COLOR,
                             HSBType.fromRGB((color / 256 / 256) & 0xff, (color / 256) & 0xff, color & 0xff));
-                } else {
-                    logger.error("Can't handle command {} on channel {}", command, channelUID);
+                    return;
                 }
                 break;
             case CHANNEL_GATEWAY_SOUND:
@@ -110,8 +110,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     int volume = state instanceof DecimalType ? ((DecimalType) state).intValue() : 50;
                     writeBridgeRingtone(((DecimalType) command).intValue(), volume);
                     updateState(CHANNEL_GATEWAY_SOUND_SWITCH, OnOffType.ON);
-                } else {
-                    logger.error("Can't handle command {} on channel {}", command, channelUID);
+                    return;
                 }
                 break;
             case CHANNEL_GATEWAY_SOUND_SWITCH:
@@ -119,17 +118,15 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                     if (((OnOffType) command) == OnOffType.OFF) {
                         stopRingtone();
                     }
-                } else {
-                    logger.error("Can't handle command {} on channel {}", command, channelUID);
+                    return;
                 }
                 break;
             case CHANNEL_GATEWAY_VOLUME:
                 // nothing to do, just suppress error
-                break;
-            default:
-                logger.error("Can't handle command {} on channel {}", command, channelUID);
-                break;
+                return;
         }
+        // Only gets here, if no condition was met
+        logger.warn("Can't handle command {} on channel {}", command, channelUID);
     }
 
     @Override

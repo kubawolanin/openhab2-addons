@@ -36,13 +36,13 @@ public class XiaomiAqaraActorSwitch2Handler extends XiaomiActorBaseHandler {
         switch (channelUID.getId()) {
             case CHANNEL_AQARA_CH0:
                 getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_0" }, new Object[] { status });
-                break;
+                return;
             case CHANNEL_AQARA_CH1:
                 getXiaomiBridgeHandler().writeToDevice(itemId, new String[] { "channel_1" }, new Object[] { status });
-                break;
-            default:
-                logger.error("Can't handle command {} on channel {}", command, channelUID);
+                return;
         }
+        // Only gets here, if no condition was met
+        logger.error("Can't handle command {} on channel {}", command, channelUID);
     }
 
     @Override

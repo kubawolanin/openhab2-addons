@@ -57,9 +57,10 @@ public class XiaomiSensorMagnetHandler extends XiaomiSensorBaseHandlerWithTimer 
         if (CHANNEL_OPEN_ALARM_TIMER.equals(channelUID.getId())) {
             if (command != null && command instanceof DecimalType) {
                 setTimerFromDecimalType((DecimalType) command);
-            } else {
-                logger.error("Cannot execute command {} on channel {}", channelUID, command);
+                return;
             }
+            // Only gets here, if no condition was met
+            logger.error("Can't handle command {} on channel {}", command, channelUID);
         } else {
             logger.error("Channel {} does not exist", channelUID);
         }
