@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.openhab.binding.mihome.handler.XiaomiBridgeHandler;
+import org.openhab.binding.mihome.internal.discovery.XiaomiBridgeDiscoveryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -177,7 +179,7 @@ public abstract class XiaomiSocket {
                     logger.debug("Received Datagram from Address {}", address.getHostAddress());
                     String sentence = new String(dgram.getData(), 0, dgram.getLength());
                     JsonObject message = PARSER.parse(sentence).getAsJsonObject();
-                    notifyAll(listeners, message);
+                    notifyAll(listeners, message, address);
                     logger.trace("Data received and notified {} listeners", listeners.size());
                 }
             } catch (IOException e) {
@@ -191,14 +193,23 @@ public abstract class XiaomiSocket {
         }
 
         /**
-         * Notifies all {@link XiaomiSocketListener} on the parent {@link XiaomiSocket}
+         * Notifies all {@link XiaomiSocketListener} on the parent {@link XiaomiSocket}. First checks for any matching
+         * {@link XiaomiBridgeHandler}, before passing to any {@link XiaomiBridgeDiscoveryService}.
          *
          * @param listeners - a list of all {@link XiaomiSocketListener} to notify
          * @param message - the data message as {@link JsonObject}
          */
-        synchronized void notifyAll(List<XiaomiSocketListener> listeners, JsonObject message) {
+        synchronized void notifyAll(List<XiaomiSocketListener> listeners, JsonObject message, InetAddress address) {
             for (XiaomiSocketListener listener : listeners) {
-                listener.onDataReceived(message);
+                if (listener instanceof XiaomiBridgeHandler && ((XiaomiBridgeHandler) listener).getHost().equals(address)) {
+                    listener.onDataReceived(message);
+                    return;
+                }
+            }
+            for (XiaomiSocketListener listener : listeners) {
+                if (listener instanceof XiaomiBridgeDiscoveryService) {
+                    listener.onDataReceived(message);
+                }
             }
         }
     }

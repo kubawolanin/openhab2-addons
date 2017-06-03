@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.core.Configuration;
@@ -54,16 +55,18 @@ import com.google.gson.JsonParser;
  */
 public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements XiaomiSocketListener {
 
-    private static final int DISCOVERY_LOCK_TIME = 10000;
+    private static final int DISCOVERY_LOCK_TIME_MILLIS = 10000;
+    private static final int READ_ACK_RETENTION_MILLIS = 20000;
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Collections.singleton(THING_TYPE_BRIDGE);
     private static final JsonParser PARSER = new JsonParser();
+    private static Map<String, JsonObject> retentionBox = new ConcurrentHashMap<>();
 
     private final Logger logger = LoggerFactory.getLogger(XiaomiBridgeHandler.class);
 
     private List<XiaomiItemUpdateListener> itemListeners = new ArrayList<>();
     private List<XiaomiItemUpdateListener> itemDiscoveryListeners = new ArrayList<>();
 
-    private String token; // token of gateway
+    private String gatewayToken;
     private long lastDiscoveryTime;
     private Map<String, Long> lastOnlineMap = new HashMap<>();
 
@@ -89,7 +92,8 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
             host = InetAddress.getByName(config.get(HOST).toString());
             port = getConfigInteger(config, PORT);
         } catch (UnknownHostException e) {
-            logger.error("Bridge IP/PORT config is not set or not valid");
+            logger.warn("Bridge IP/PORT config is not set or not valid");
+            return;
         }
         if (XiaomiSocket.getOpenSockets().containsKey(port)) {
             socket = (XiaomiBridgeSocket) XiaomiSocket.getOpenSockets().get(port);
@@ -120,30 +124,74 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
 
     @Override
     public void onDataReceived(JsonObject message) {
-        logger.trace("Received message {}", message.toString());
+        logger.trace("Received message {}", message);
         String sid = message.has("sid") ? message.get("sid").getAsString() : null;
         String command = message.get("cmd").getAsString();
 
         updateDeviceStatus(sid);
         updateStatus(ThingStatus.ONLINE);
-
-        if ("heartbeat".equals(command) && message.has("token")) {
-            this.token = message.get("token").getAsString();
-        } else if ("get_id_list_ack".equals(command)) {
-            JsonArray devices = PARSER.parse(message.get("data").getAsString()).getAsJsonArray();
-            for (JsonElement deviceId : devices) {
-                String device = deviceId.getAsString();
-                sendCommandToBridge("read", device);
-            }
-            // as well get gateway status
-            sendCommandToBridge("read", getGatewaySid());
-            return;
-        } else if ("read_ack".equals(command)) {
-            logger.debug("Device {} honored read request", sid);
-        } else if ("write_ack".equals(command)) {
-            logger.debug("Device {} honored write request", sid);
+        switch (command) {
+            case "iam":
+                return;
+            case "heartbeat":
+                if (message.has("token")) {
+                    this.gatewayToken = message.get("token").getAsString();
+                }
+                break;
+            case "get_id_list_ack":
+                JsonArray devices = PARSER.parse(message.get("data").getAsString()).getAsJsonArray();
+                for (JsonElement deviceId : devices) {
+                    String device = deviceId.getAsString();
+                    sendCommandToBridge("read", device);
+                }
+                // as well get gateway status
+                sendCommandToBridge("read", getGatewaySid());
+                return;
+            case "read_ack":
+                logger.debug("Device {} honored read request", sid);
+                retend(sid, message);
+                break;
+            case "write_ack":
+                logger.debug("Device {} honored write request", sid);
+                break;
+            default:
+                return;
         }
         notifyListeners(command, message);
+    }
+
+    private synchronized void retend(String sid, JsonObject message) {
+
+        synchronized (retentionBox) {
+            retentionBox.remove(sid);
+            retentionBox.put(sid, message);
+        }
+        scheduler.schedule(new RemoveRetentionRunnable(sid), READ_ACK_RETENTION_MILLIS, TimeUnit.MILLISECONDS);
+    }
+
+    private class RemoveRetentionRunnable implements Runnable {
+        private String sid;
+
+        public RemoveRetentionRunnable(String sid) {
+            this.sid = sid;
+        }
+
+        @Override
+        public synchronized void run() {
+            synchronized (retentionBox) {
+                retentionBox.remove(sid);
+            }
+        }
+    }
+
+    public synchronized JsonObject getRetentedMessage(String sid) {
+        synchronized (retentionBox) {
+            JsonObject ret = retentionBox.get(sid);
+            if (ret != null) {
+                retentionBox.remove(sid);
+            }
+            return ret;
+        }
     }
 
     private synchronized void notifyListeners(String command, JsonObject message) {
@@ -155,13 +203,9 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
             return;
         }
         for (XiaomiItemUpdateListener itemListener : itemListeners) {
-            if (itemListener.getItemId().equals(sid)) {
-                try {
-                    itemListener.onItemUpdate(sid, command, message);
-                    knownDevice = true;
-                } catch (Exception e) {
-                    logger.error("An exception occurred while calling the BridgeHeartbeatListener", e);
-                }
+            if (sid.equals(itemListener.getItemId())) {
+                itemListener.onItemUpdate(sid, command, message);
+                knownDevice = true;
             }
         }
         if (!knownDevice) {
@@ -174,7 +218,7 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
     public synchronized boolean registerItemListener(XiaomiItemUpdateListener listener) {
         boolean result = false;
         if (listener == null) {
-            logger.error("It's not allowed to pass a null XiaomiItemUpdateListener");
+            logger.warn("It's not allowed to pass a null XiaomiItemUpdateListener");
         } else if (listener instanceof XiaomiItemDiscoveryService) {
             result = !(itemDiscoveryListeners.contains(listener)) ? itemDiscoveryListeners.add(listener) : false;
             logger.debug("Having {} Discovery listeners", itemDiscoveryListeners.size());
@@ -259,15 +303,10 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
         String key = (String) getConfig().get("key");
 
         if (key == null) {
-            logger.error("No key set in the gateway settings. Edit it in the configuration.");
+            logger.warn("No key set in the gateway settings. Edit it in the configuration.");
             return "";
         }
-        try {
-            key = EncryptionHelper.encrypt(token, key);
-        } catch (Exception e) {
-            logger.error("Caught Exeption {}", e);
-            key = "";
-        }
+        key = EncryptionHelper.encrypt(gatewayToken, key);
         return key;
     }
 
@@ -316,7 +355,7 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
     }
 
     private void discoverItems() {
-        if (System.currentTimeMillis() - lastDiscoveryTime > DISCOVERY_LOCK_TIME) {
+        if (System.currentTimeMillis() - lastDiscoveryTime > DISCOVERY_LOCK_TIME_MILLIS) {
             logger.debug("Triggered discovery");
             sendCommandToBridge("get_id_list");
             lastDiscoveryTime = System.currentTimeMillis();
@@ -335,5 +374,9 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
             lastOnlineMap.put(sid, System.currentTimeMillis());
             logger.debug("Updated \"last time seen\" for device {}", sid);
         }
+    }
+
+    public InetAddress getHost() {
+        return host;
     }
 }

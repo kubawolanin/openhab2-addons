@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.core.items.Item;
 import org.eclipse.smarthome.core.thing.Bridge;
@@ -54,6 +53,8 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
 
     private static final long ONLINE_TIMEOUT_MILLIS = 2 * 60 * 60 * 1000; // 2 hours
 
+    private static final int REFRESH_AFTER_MILLIS = 250;
+
     private JsonParser parser = new JsonParser();
 
     private XiaomiBridgeHandler bridgeHandler;
@@ -69,12 +70,7 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
     @Override
     public void initialize() {
         itemId = (String) getConfig().get(ITEM_ID);
-        scheduler.schedule(new Runnable() {
-            @Override
-            public void run() {
-                updateThingStatus();
-            }
-        }, 100, TimeUnit.MILLISECONDS);
+        updateThingStatus();
     }
 
     @Override
@@ -93,6 +89,12 @@ public abstract class XiaomiDeviceBaseHandler extends BaseThingHandler implement
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.debug("Device {} on channel {} received command {}", itemId, channelUID, command);
         if (command instanceof RefreshType) {
+            JsonObject message = getXiaomiBridgeHandler().getRetentedMessage(itemId);
+            if (message != null) {
+                String cmd = message.get("cmd").getAsString();
+                logger.debug("Update Item {} with retented message", itemId);
+                onItemUpdate(itemId, cmd, message);
+            }
             return;
         }
         execute(channelUID, command);
