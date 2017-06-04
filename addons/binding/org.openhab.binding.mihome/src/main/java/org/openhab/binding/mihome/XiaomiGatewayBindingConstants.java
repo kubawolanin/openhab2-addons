@@ -31,8 +31,8 @@ public class XiaomiGatewayBindingConstants {
     public static final ThingTypeUID THING_TYPE_SENSOR_CUBE = new ThingTypeUID(BINDING_ID, "sensor_cube");
     public static final ThingTypeUID THING_TYPE_SENSOR_AQARA1 = new ThingTypeUID(BINDING_ID, "86sw1");
     public static final ThingTypeUID THING_TYPE_SENSOR_AQARA2 = new ThingTypeUID(BINDING_ID, "86sw2");
-    public static final ThingTypeUID THING_TYPE_SENSOR_GAS = new ThingTypeUID(BINDING_ID, "sensor_gas");
-    public static final ThingTypeUID THING_TYPE_SENSOR_SMOKE = new ThingTypeUID(BINDING_ID, "sensor_smoke");
+    public static final ThingTypeUID THING_TYPE_SENSOR_GAS = new ThingTypeUID(BINDING_ID, "natgas");
+    public static final ThingTypeUID THING_TYPE_SENSOR_SMOKE = new ThingTypeUID(BINDING_ID, "smoke");
     // actors
     public static final ThingTypeUID THING_TYPE_ACTOR_PLUG = new ThingTypeUID(BINDING_ID, "sensor_plug");
     public static final ThingTypeUID THING_TYPE_ACTOR_AQARA1 = new ThingTypeUID(BINDING_ID, "ctrl_neutral1");
