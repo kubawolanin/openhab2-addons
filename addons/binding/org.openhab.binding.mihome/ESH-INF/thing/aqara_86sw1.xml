@@ -12,7 +12,7 @@
 		<description>Battery powered Aqara Switch with 1 Channel</description>
 
 		<channels>
-			<channel id="sw1" typeId="sw1-trg" />
+			<channel id="ch1" typeId="sw1-trg" />
 			<channel id="batteryLevel" typeId="system.battery-level" />
 			<channel id="lowBattery" typeId="system.low-battery" />
 		</channels>

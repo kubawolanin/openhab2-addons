@@ -154,8 +154,6 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
             case "write_ack":
                 logger.debug("Device {} honored write request", sid);
                 break;
-            default:
-                return;
         }
         notifyListeners(command, message);
     }

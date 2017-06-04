@@ -36,13 +36,13 @@ public class XiaomiAqaraSensorSwitch2Handler extends XiaomiSensorBaseHandler {
     @Override
     void parseDefault(JsonObject data) {
         if (data.has("channel_0")) {
-            triggerChannel(CHANNEL_AQARA_CH0, data.get("channel_0").getAsString().toUpperCase());
+            triggerChannel(CHANNEL_SWITCH_CH0, data.get("channel_0").getAsString().toUpperCase());
         }
         if (data.has("channel_1")) {
-            triggerChannel(CHANNEL_AQARA_CH1, data.get("channel_1").getAsString().toUpperCase());
+            triggerChannel(CHANNEL_SWITCH_CH1, data.get("channel_1").getAsString().toUpperCase());
         }
         if (data.has("dual_channel")) {
-            triggerChannel(CHANNEL_AQARA_DUAL_CH, data.get("dual_channel").getAsString().toUpperCase());
+            triggerChannel(CHANNEL_SWITCH_DUAL_CH, data.get("dual_channel").getAsString().toUpperCase());
         }
     }
 }

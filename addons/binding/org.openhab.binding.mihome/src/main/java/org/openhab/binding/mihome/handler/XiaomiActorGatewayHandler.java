@@ -36,7 +36,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
     private static final int COLOR_TEMPERATURE_MAX = 6500;
     private static final int COLOR_TEMPERATURE_MIN = 1700;
 
-    private float lastBrightness = -1;
+    private Integer lastBrightness;
 
     private final Logger logger = LoggerFactory.getLogger(XiaomiActorGatewayHandler.class);
 
@@ -49,11 +49,11 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
         switch (channelUID.getId()) {
             case CHANNEL_BRIGHTNESS:
                 if (command instanceof PercentType) {
-                    float newBright = ((PercentType) command).floatValue();
+                    int newBright = ((PercentType) command).intValue();
                     if (lastBrightness != newBright) {
                         lastBrightness = newBright;
                         logger.debug("Set brigthness to {}", lastBrightness);
-                        writeBridgeLightColor(getGatewayLightColor(), lastBrightness / 100);
+                        writeBridgeLightColor(getGatewayLightColor(), lastBrightness);
                     } else {
                         logger.debug("Do not send this command, value {} already set", newBright);
                     }
@@ -61,7 +61,7 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
                 } else if (command instanceof OnOffType) {
                     restoreBrightnessFromItem();
 
-                    writeBridgeLightColor(getGatewayLightColor(), command == OnOffType.ON ? lastBrightness / 100 : 0);
+                    writeBridgeLightColor(getGatewayLightColor(), command == OnOffType.ON ? lastBrightness : 0);
                     return;
                 }
                 break;
@@ -116,22 +116,22 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
     }
 
     private void restoreBrightnessFromItem() {
-        if (lastBrightness == -1) {
+        if (lastBrightness == null) {
             try {
                 Iterator<Item> iter = linkRegistry
                         .getLinkedItems(new ChannelUID(this.thing.getUID(), CHANNEL_BRIGHTNESS)).iterator();
                 while (iter.hasNext()) {
                     Item item = iter.next();
                     if (item.getState() instanceof PercentType) {
-                        lastBrightness = Float.parseFloat(item.getState().toString());
+                        lastBrightness = Integer.parseInt(item.getState().toString());
                         logger.debug("last brightness value found: {}", lastBrightness);
                         break;
                     }
                 }
-                lastBrightness = lastBrightness == -1 || lastBrightness == 0 ? 1 : lastBrightness;
+                lastBrightness = lastBrightness == null || lastBrightness == 0 ? 100 : lastBrightness;
                 logger.debug("No dimmer value for brightness found, adjusted to {}", lastBrightness);
             } catch (NumberFormatException e) {
-                lastBrightness = 1;
+                lastBrightness = 100;
                 logger.debug("No last brightness value found - assuming 100");
             }
         }
@@ -185,27 +185,27 @@ public class XiaomiActorGatewayHandler extends XiaomiActorBaseHandler {
         return 0xffffff;
     }
 
-    private float getGatewayLightBrightness() {
+    private int getGatewayLightBrightness() {
         Item item = getItemInChannel(CHANNEL_BRIGHTNESS);
         if (item == null) {
-            return 1f;
+            return 100;
         }
 
         State state = item.getState();
         if (state == null) {
-            return 1f;
+            return 100;
         } else if (state instanceof PercentType) {
             PercentType brightness = (PercentType) state;
-            return brightness.floatValue() / 100;
+            return brightness.intValue();
         } else if (state instanceof OnOffType) {
-            return state == OnOffType.ON ? 1f : 0f;
+            return state == OnOffType.ON ? 100 : 0;
         }
 
-        return 1f;
+        return 100;
     }
 
-    private void writeBridgeLightColor(int color, float brightness) {
-        long brightnessInt = (int) (brightness * 100) << 24;
+    private void writeBridgeLightColor(int color, int brightness) {
+        long brightnessInt = brightness << 24;
         writeBridgeLightColor((color & 0xffffff) | brightnessInt & 0xff000000);
     }
 

@@ -12,9 +12,9 @@
 		<description>Battery powered Aqara Switch with 2 channels</description>
 
 		<channels>
-			<channel id="sw1" typeId="86sw1" />
-			<channel id="sw2" typeId="86sw2" />
-			<channel id="dual_sw" typeId="dual_sw" />
+			<channel id="ch1" typeId="sw1-trg" />
+			<channel id="ch2" typeId="sw2-trg" />
+			<channel id="dual_ch" typeId="dual_sw" />
 			<channel id="batteryLevel" typeId="system.battery-level" />
 			<channel id="lowBattery" typeId="system.low-battery" />
 		</channels>

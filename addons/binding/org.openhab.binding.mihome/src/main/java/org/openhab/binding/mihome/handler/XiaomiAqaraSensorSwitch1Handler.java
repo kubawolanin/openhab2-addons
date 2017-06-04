@@ -8,7 +8,7 @@
  */
 package org.openhab.binding.mihome.handler;
 
-import static org.openhab.binding.mihome.XiaomiGatewayBindingConstants.CHANNEL_AQARA_CH0;
+import static org.openhab.binding.mihome.XiaomiGatewayBindingConstants.CHANNEL_SWITCH_CH0;
 
 import org.eclipse.smarthome.core.thing.Thing;
 
@@ -36,7 +36,7 @@ public class XiaomiAqaraSensorSwitch1Handler extends XiaomiSensorBaseHandler {
     @Override
     void parseDefault(JsonObject data) {
         if (data.has("channel_0")) {
-            triggerChannel(CHANNEL_AQARA_CH0, data.get("channel_0").getAsString().toUpperCase());
+            triggerChannel(CHANNEL_SWITCH_CH0, data.get("channel_0").getAsString().toUpperCase());
         }
     }
 }

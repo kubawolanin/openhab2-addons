@@ -31,10 +31,14 @@ public class XiaomiGatewayBindingConstants {
     public static final ThingTypeUID THING_TYPE_SENSOR_CUBE = new ThingTypeUID(BINDING_ID, "sensor_cube");
     public static final ThingTypeUID THING_TYPE_SENSOR_AQARA1 = new ThingTypeUID(BINDING_ID, "86sw1");
     public static final ThingTypeUID THING_TYPE_SENSOR_AQARA2 = new ThingTypeUID(BINDING_ID, "86sw2");
+    public static final ThingTypeUID THING_TYPE_SENSOR_GAS = new ThingTypeUID(BINDING_ID, "sensor_gas");
+    public static final ThingTypeUID THING_TYPE_SENSOR_SMOKE = new ThingTypeUID(BINDING_ID, "sensor_smoke");
     // actors
     public static final ThingTypeUID THING_TYPE_ACTOR_PLUG = new ThingTypeUID(BINDING_ID, "sensor_plug");
     public static final ThingTypeUID THING_TYPE_ACTOR_AQARA1 = new ThingTypeUID(BINDING_ID, "ctrl_neutral1");
     public static final ThingTypeUID THING_TYPE_ACTOR_AQARA2 = new ThingTypeUID(BINDING_ID, "ctrl_neutral2");
+    public static final ThingTypeUID THING_TYPE_ACTOR_WALL1 = new ThingTypeUID(BINDING_ID, "ctrl_ln1");
+    public static final ThingTypeUID THING_TYPE_ACTOR_WALL2 = new ThingTypeUID(BINDING_ID, "ctrl_ln2");
     public static final ThingTypeUID THING_TYPE_ACTOR_CURTAIN = new ThingTypeUID(BINDING_ID, "curtain");
 
     // List of all Channel ids
@@ -73,12 +77,14 @@ public class XiaomiGatewayBindingConstants {
     public static final String CHANNEL_COLOR = "color";
     public static final String CHANNEL_COLOR_TEMPERATURE = "colorTemperature";
     // aqara switches
-    public static final String CHANNEL_AQARA_CH0 = "sw1";
-    public static final String CHANNEL_AQARA_CH1 = "sw2";
-    public static final String CHANNEL_AQARA_DUAL_CH = "dual_sw";
+    public static final String CHANNEL_SWITCH_CH0 = "ch1";
+    public static final String CHANNEL_SWITCH_CH1 = "ch2";
+    public static final String CHANNEL_SWITCH_DUAL_CH = "dual_ch";
     // curtain
     public static final String CHANNEL_CURTAIN_CONTROL = "curtainControl";
-    public static final String CHANNEL_CURTAIN_LEVEL = "curtainLevel";
+    // gas & smoke sensor
+    public static final String CHANNEL_ALARM = "alarm";
+    public static final String CHANNEL_ALARM_STATUS = "status";
 
     // Bridge config properties
     public static final String SERIAL_NUMBER = "serialNumber";

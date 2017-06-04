@@ -17,6 +17,10 @@ from the [Google Play](https://play.google.com/store/apps/details?id=com.xiaomi.
 * Xiaomi Aqara ZigBee Wired Wall Switch (1 and 2 buttons)
 * Xiaomi Aqara ZigBee Wireless Wall Switch (1 and 2 buttons)
 * Xiaomi Aqara Smart Curtain
+
+(not yet confirmed)
+* New one-button switch
+* New two-button switch
 * Xiaomi Mijia Honeywell Gas Alarm Detector
 * Xiaomi Mijia Honeywell Fire Alarm Detector
 
@@ -87,7 +91,7 @@ Number HT_Battery <battery> { channel="mihome:sensor_ht:<ID>:voltage" }
 
 // Xiaomi Motion Sensor
 Switch MotionSensor_MotionStatus <motion>  { channel="mihome:sensor_motion:<ID>:motion" }
-// minimum 5 seconds
+// minimum 5 seconds - remember that the sensor only triggers every minute to save energy
 Number MotionSensor_MotionTimer <clock> { channel="mihome:sensor_motion:<ID>:motionOffTimer" }
 DateTime MotionSensor_LastMotion "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion:<ID>:lastMotion" }
 Number MotionSensor_Battery <battery> { channel="mihome:sensor_motion:<ID>:voltage" }
@@ -120,11 +124,14 @@ Number AqaraSwitch1_Battery <battery> { channel="mihome:86sw1:<ID>:voltage" }
 Number AqaraSwitch2_Battery <battery> { channel="mihome:86sw2:<ID>:voltage" }
 
 // Xiaomi Aqara Mains Powered Wall Switch 1
-Switch AqaraWallSwitch <switch> { channel="mihome:ctrl_neutral1:<ID>:sw1" }
+Switch AqaraWallSwitch <switch> { channel="mihome:ctrl_neutral1:<ID>:ch1" }
 
 // Xiaomi Aqara Mains Powered Wall Switch 2
-Switch AqaraWallSwitch1 <switch> { channel="mihome:ctrl_neutral2:<ID>:sw1" }
-Switch AqaraWallSwitch2 <switch> { channel="mihome:ctrl_neutral2:<ID>:sw2" }
+Switch AqaraWallSwitch1 <switch> { channel="mihome:ctrl_neutral2:<ID>:ch1" }
+Switch AqaraWallSwitch2 <switch> { channel="mihome:ctrl_neutral2:<ID>:ch2" }
+
+// Xiaomi Aqara Intelligent Curtain Motor
+Rollershutter CurtainMotorControl <blinds> { channel="curtain:<ID>:curtainControl" }
 ```
 
 ### xiaomi.rules:
@@ -218,28 +225,28 @@ end
 
 rule "Xiaomi Aqara Battery Powered 1 Button Switch"
 when
-    Channel "mihome:86sw1:<ID>:sw1" triggered CLICK
+    Channel "mihome:86sw1:<ID>:ch1" triggered CLICK
 then
     <ACTION>
 end
 
 rule "Xiaomi Aqara Battery Powered 2 Button Switch"
 when
-    Channel "mihome:86sw2:<ID>:sw1" triggered CLICK
+    Channel "mihome:86sw2:<ID>:ch1" triggered CLICK
 then
     <ACTION>
 end
 
 rule "Xiaomi Aqara Battery Powered 2 Button Switch"
 when
-    Channel "mihome:86sw2:<ID>:sw2" triggered CLICK
+    Channel "mihome:86sw2:<ID>:ch2" triggered CLICK
 then
     <ACTION>
 end
 
 rule "Xiaomi Aqara Battery Powered 2 Button Switch"
 when
-    Channel "mihome:86sw2:<ID>:dual_sw" triggered BOTH_CLICK
+    Channel "mihome:86sw2:<ID>:dual_ch" triggered BOTH_CLICK
 then
     <ACTION>
 end
