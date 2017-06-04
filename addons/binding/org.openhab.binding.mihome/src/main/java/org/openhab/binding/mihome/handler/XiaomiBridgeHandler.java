@@ -112,7 +112,7 @@ public class XiaomiBridgeHandler extends ConfigStatusBridgeHandler implements Xi
 
     @Override
     public void dispose() {
-        logger.error("dispose");
+        logger.debug("dispose");
         socket.unregisterListener(this);
         super.dispose();
     }
