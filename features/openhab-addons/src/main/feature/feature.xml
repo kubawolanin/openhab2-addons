@@ -27,16 +27,12 @@
         <feature>openhab-runtime-base</feature>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.amazondashbutton/${project.version}</bundle>
     </feature>
-<<<<<<< HEAD
-    
-=======
 
     <feature name="openhab-binding-astro" description="Astro Binding" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.astro/${project.version}</bundle>
     </feature>
 
->>>>>>> 5647e09... added feature & removed unneeded comment
     <feature name="openhab-binding-atlona" description="Atlona PRO3 Switch Binding" version="${project.version}">
         <feature>openhab-runtime-base</feature>
         <bundle start-level="80">mvn:org.openhab.binding/org.openhab.binding.atlona/${project.version}</bundle>
