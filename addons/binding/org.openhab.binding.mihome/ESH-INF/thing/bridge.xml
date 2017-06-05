@@ -7,8 +7,8 @@
 	<bridge-type id="bridge">
 		<label>Xiaomi Mi Smart Home Bridge</label>
 		<description>Multifunctional Gateway - a bridge for the sensors. One button click turns on/off the device. Two clicks toggle "home security" feature. 
-        Three button clicks allow you to link the Xiaomi Zigbee devices with the Gateway. After you press the button 3 times, the light will flash blue;
-        After that you'll be able to add new sensors by pressing their hole button for 3 seconds.</description>
+		Three button clicks allow you to link the Xiaomi Zigbee devices with the Gateway. After you press the button 3 times, the light will flash blue;
+		After that you'll be able to add new sensors by pressing their hole button for 3 seconds.</description>
 
 		<properties>
 			<property name="vendor">Xiaomi</property>

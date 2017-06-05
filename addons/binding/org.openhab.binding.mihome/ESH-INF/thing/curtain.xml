@@ -9,11 +9,10 @@
 		</supported-bridge-type-refs>
 
 		<label>Xiaomi Mi Smart Curtain</label>
-		<description>Allows you to control the curtain (open/close/stop/auto) and read the current status of it.</description>
+		<description>Allows you to control the curtain (open/close/stop/auto) and read/write the current status of it.</description>
 
 		<channels>
 			<channel id="curtainControl" typeId="curtainControl" />
-			<channel id="curtainLevel" typeId="curtainLevel" />
 		</channels>
 
 		<config-description>
@@ -28,12 +27,6 @@
 	<channel-type id="curtainControl">
 		<item-type>Rollershutter</item-type>
 		<label>Curtain</label>
+		<category>Blinds</category>
 	</channel-type>
-
-	<channel-type id="curtainLevel">
-		<item-type>Dimmer</item-type>
-		<label>Curtain level</label>
-		<state max="100" min="0" step="1" pattern="%d %%" readOnly="false"></state>
-	</channel-type>
-
 </thing:thing-descriptions>

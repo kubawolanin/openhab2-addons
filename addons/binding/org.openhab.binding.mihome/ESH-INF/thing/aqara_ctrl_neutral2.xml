@@ -12,8 +12,8 @@
 		<description>Mains powered Aqara Switch with 2 controllable Channels</description>
 
 		<channels>
-			<channel id="sw1" typeId="sw1" />
-			<channel id="sw2" typeId="sw2" />
+			<channel id="ch1" typeId="sw1-btn" />
+			<channel id="ch2" typeId="sw2-btn" />
 		</channels>
 
 		<config-description>
@@ -25,13 +25,13 @@
 		</config-description>
 	</thing-type>
 
-	<channel-type id="sw1">
+	<channel-type id="sw1-btn">
 		<item-type>Switch</item-type>
 		<label>Button 1</label>
 		<description>The first pushbutton on the switch.</description>
 	</channel-type>
 
-	<channel-type id="sw2">
+	<channel-type id="sw2-btn">
 		<item-type>Switch</item-type>
 		<label>Button 2</label>
 		<description>The second pushbutton on the switch.</description>

@@ -12,9 +12,9 @@
 		<description>Battery powered Aqara Switch with 1 Channel</description>
 
 		<channels>
-			<channel id="sw1" typeId="sw1" />
-			<channel id="voltage" typeId="voltage" />
-			<channel id="batteryLevel" typeId="batteryLevel" />
+			<channel id="ch1" typeId="sw1-trg" />
+			<channel id="batteryLevel" typeId="system.battery-level" />
+			<channel id="lowBattery" typeId="system.low-battery" />
 		</channels>
 
 		<config-description>
@@ -25,16 +25,4 @@
 			</parameter>
 		</config-description>
 	</thing-type>
-
-	<channel-type id="sw1">
-		<kind>trigger</kind>
-		<label>Button Event</label>
-		<event>
-			<options>
-				<option value="CLICK">click</option>
-				<option value="DOUBLE_CLICK">double click</option>
-			</options>
-		</event>
-	</channel-type>
-
 </thing:thing-descriptions>

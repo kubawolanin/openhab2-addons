@@ -15,8 +15,8 @@
 			<channel id="action" typeId="action"></channel>
 			<channel id="rotationAngle" typeId="rotationAngle"></channel>
 			<channel id="rotationTime" typeId="rotationTime"></channel>
-			<channel id="voltage" typeId="voltage" />
-			<channel id="batteryLevel" typeId="batteryLevel" />
+			<channel id="batteryLevel" typeId="system.battery-level" />
+			<channel id="lowBattery" typeId="system.low-battery" />
 		</channels>
 
 		<config-description>
