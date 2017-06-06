@@ -87,14 +87,16 @@ Dimmer Gateway_SoundVolume <soundvolume> { channel="mihome:gateway:<ID>:volume" 
 // Xiaomi Temperature and Humidity Sensor
 Number HT_Temperature <temperature> { channel="mihome:sensor_ht:<ID>:temperature" }
 Number HT_Humidity <humidity> { channel="mihome:sensor_ht:<ID>:humidity" }
-Number HT_Battery <battery> { channel="mihome:sensor_ht:<ID>:voltage" }
+Number HT_Battery <battery> { channel="mihome:sensor_ht:<ID>:batteryLevel" }
+Switch HT_BatteryLow <energy> { channel="mihome:sensor_ht:<ID>:lowBattery" }
 
 // Xiaomi Motion Sensor
 Switch MotionSensor_MotionStatus <motion>  { channel="mihome:sensor_motion:<ID>:motion" }
 // minimum 5 seconds - remember that the sensor only triggers every minute to save energy
 Number MotionSensor_MotionTimer <clock> { channel="mihome:sensor_motion:<ID>:motionOffTimer" }
 DateTime MotionSensor_LastMotion "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_motion:<ID>:lastMotion" }
-Number MotionSensor_Battery <battery> { channel="mihome:sensor_motion:<ID>:voltage" }
+Number MotionSensor_Battery <battery> { channel="mihome:sensor_motion:<ID>:batteryLevel" }
+Switch MotionSensor_BatteryLow <energy> { channel="mihome:sensor_motion:<ID>:lowBattery" }
 
 // Xiaomi Plug
 Switch Plug_Switch <switch> { channel="mihome:sensor_plug:<ID>:powerOn" }
@@ -107,21 +109,26 @@ Contact WindowSwitch_Status <window>  { channel="mihome:sensor_magnet:<ID>:isOpe
 // minimum 30 seconds
 Number WindowSwitch_AlarmTimer <clock> { channel="mihome:sensor_magnet:<ID>:isOpenAlarmTimer" }
 DateTime WindowSwitch_LastOpened "[%1$tY-%1$tm-%1$td  %1$tH:%1$tM]" <clock-on> { channel="mihome:sensor_magnet:<ID>:lastOpened" }
-Number WindowSwitch_Battery <battery> { channel="mihome:sensor_magnet:<ID>:voltage" }
+Number WindowSwitch_Battery <battery> { channel="mihome:sensor_magnet:<ID>:batteryLevel" }
+Switch WindowSwitch_BatteryLow <energy> { channel="mihome:sensor_magnet:<ID>:lowBattery" }
 
 // Xiaomi Cube - see "xiaomi.rules" for action triggers
 Number Cube_RotationAngle { channel="mihome:sensor_cube:<ID>:rotationAngle" }
 Number Cube_RotationTime { channel="mihome:sensor_cube:<ID>:rotationTime" }
-Number Cube_Battery <battery> { channel="mihome:sensor_cube:<ID>:voltage" }
+Number Cube_Battery <battery> { channel="mihome:sensor_cube:<ID>:batteryLevel" }
+Switch Cube_BatteryLow <energy> { channel="mihome:sensor_cube:<ID>:lowBattery" }
 
 // Xiaomi Switch - see "xiaomi.rules" for action triggers
-Number Switch_Battery <battery> { channel="mihome:sensor_switch:<ID>:voltage" }
+Number Switch_Battery <battery> { channel="mihome:sensor_switch:<ID>:batteryLevel" }
+Switch Switch_BatteryLow <energy> { channel="mihome:sensor_switch:<ID>:lowBattery" }
 
 // Xiaomi Aqara Battery Powered Switch 1- see "xiaomi.rules" for action triggers
-Number AqaraSwitch1_Battery <battery> { channel="mihome:86sw1:<ID>:voltage" }
+Number AqaraSwitch1_Battery <battery> { channel="mihome:86sw1:<ID>:batteryLevel" }
+Switch AqaraSwitch1_BatteryLow <energy> { channel="mihome:86sw1:<ID>:lowBattery" }
 
 // Xiaomi Aqara Battery Powered Switch 2- see "xiaomi.rules" for action triggers
-Number AqaraSwitch2_Battery <battery> { channel="mihome:86sw2:<ID>:voltage" }
+Number AqaraSwitch2_Battery <battery> { channel="mihome:86sw2:<ID>:batteryLevel" }
+Switch AqaraSwitch2_BatteryLow <energy> { channel="mihome:86sw2:<ID>:lowBattery" }
 
 // Xiaomi Aqara Mains Powered Wall Switch 1
 Switch AqaraWallSwitch <switch> { channel="mihome:ctrl_neutral1:<ID>:ch1" }
@@ -247,14 +254,6 @@ end
 rule "Xiaomi Aqara Battery Powered 2 Button Switch"
 when
     Channel "mihome:86sw2:<ID>:dual_ch" triggered BOTH_CLICK
-then
-    <ACTION>
-end
-
-// This rule is applicable for every battery powered sensor device
-rule "Xiaomi Motion Sensor Low Battery"
-when
-    Channel "mihome:sensor_motion:<ID>:batteryLevel" triggered LOW
 then
     <ACTION>
 end
