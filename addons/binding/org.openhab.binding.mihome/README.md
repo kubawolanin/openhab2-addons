@@ -19,8 +19,7 @@ from the [Google Play](https://play.google.com/store/apps/details?id=com.xiaomi.
 * Xiaomi Aqara Smart Curtain
 
 (not yet confirmed)
-* New one-button switch
-* New two-button switch
+* Xiaomi Aqara Neutral Wall Switch (1 and 2 buttons)
 * Xiaomi Mijia Honeywell Gas Alarm Detector
 * Xiaomi Mijia Honeywell Fire Alarm Detector
 
@@ -70,6 +69,26 @@ There are two ways of connecting Xiaomi devices to the gateway:
 The binding requires port `9898` to not be used by any other service on the system.
 
 ## Full Example
+
+### xiaomi.things:
+
+```
+Bridge mihome:bridge:f0b429XXXXXX "Xiaomi Gateway" [ serialNumber="f0b429XXXXXX", ipAddress="192.168.0.3", port=9898, key="XXXXXXXXXXXXXXXX", pollingInterval=6000 ] {
+    Thing mihome:gateway:f0b429XXXXXX "Xiaomi Mi Smart Home Gateway" [itemId="f0b429XXXXXX"]
+
+    Thing mihome:sensor_ht:158d0001XXXXXX "Xiaomi Temperature Sensor" [itemId="158d0001XXXXXX"]
+
+    Thing mihome:sensor_motion:158d0001XXXXXX "Xiaomi Motion Sensor" [itemId="158d0001XXXXXX"]
+
+    Thing mihome:sensor_plug:158d0001XXXXXX "Xiaomi Plug" [itemId="158d0001XXXXXX"]
+
+    Thing mihome:sensor_magnet:158d0001XXXXXX "Xiaomi Door Sensor" [itemId="158d0001XXXXXX"]
+
+    Thing mihome:sensor_switch:158d0001XXXXXX "Xiaomi Mi Wireless Switch" [itemId="158d0001XXXXXX"]
+
+    Thing mihome:86sw2:158d0001XXXXXX "Aqara Wireless Wall Switch" [itemId="158d0001XXXXXX"]
+}
+```
 
 ### xiaomi.items:
 
@@ -254,7 +273,7 @@ end
 // This rule is applicable for every battery powered sensor device
 rule "Xiaomi Motion Sensor Low Battery"
 when
-    Channel "mihome:sensor_motion:<ID>:batteryLevel" triggered LOW
+    Channel "mihome:sensor_motion:<ID>:lowBattery" changed to ON
 then
     <ACTION>
 end
@@ -274,30 +293,37 @@ end
 ### xiaomi.sitemap:
 
 ```
-// Selection for Xiaomi Gateway Sounds
-// 10000 is STOP
-// >10001 are own sounds you uploaded to the gateway
-Selection item=Gateway_Sound mappings=[ 0="police car 1",
-                                        1="police car 2",
-                                        2="accident",
-                                        3="countdown", 
-                                        4="ghost",
-                                        5="sniper rifle",
-                                        6="battle",
-                                        7="air raid",
-                                        8="bark", 
-                                        10="doorbell",
-                                        11="knock at a door",
-                                        12="amuse",
-                                        13="alarm clock",
-                                        20="mimix",
-                                        21="enthusuastic",
-                                        22="guitar classic",
-                                        23="ice world piano", 
-                                        24="leisure time", 
-                                        25="child hood", 
-                                        26="morning stream liet", 
-                                        27="music box", 
-                                        28="orange", 
-                                        29="thinker"]
-``
+sitemap xiaomi label="Xiaomi" {
+    
+	Frame {
+        ...
+
+        // Selection for Xiaomi Gateway Sounds
+        // 10000 is STOP
+        // >10001 are own sounds you uploaded to the gateway
+        Selection item=Gateway_Sound mappings=[ 0="police car 1",
+                                                1="police car 2",
+                                                2="accident",
+                                                3="countdown", 
+                                                4="ghost",
+                                                5="sniper rifle",
+                                                6="battle",
+                                                7="air raid",
+                                                8="bark", 
+                                                10="doorbell",
+                                                11="knock at a door",
+                                                12="amuse",
+                                                13="alarm clock",
+                                                20="mimix",
+                                                21="enthusuastic",
+                                                22="guitar classic",
+                                                23="ice world piano", 
+                                                24="leisure time", 
+                                                25="child hood", 
+                                                26="morning stream liet", 
+                                                27="music box", 
+                                                28="orange", 
+                                                29="thinker"]
+    }
+}
+```
