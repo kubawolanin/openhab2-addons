@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="reaper" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0" xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<thing-type id="reaper">
+		<label>Reaper DAW</label>
+		<description>Reaper web interface</description>
+
+		<channels>
+			<channel id="volume" typeId="system.volume">
+				<label>Master track volume</label>
+				<description>Control volume of the master track</description>
+			</channel>
+			<channel id="stop" typeId="stop" />
+			<channel id="control" typeId="system.media-control" />
+			<channel id="metronome" typeId="metronoe" />
+			<channel id="action" typeId="action" />
+		</channels>
+
+		<properties>
+			<property name="version">unknown</property>
+		</properties>
+
+		<representation-property>ipAddress</representation-property>
+
+		<config-description-ref uri="thing-type:reaper:reaper" />
+	</thing-type>
+
+	<!-- Reaper Commands -->
+	<channel-type id="stop">
+		<item-type>Switch</item-type>
+		<label>Stop</label>
+		<description>Stops the playback. ON if the player is stopped.</description>
+	</channel-type>
+	<channel-type id="metronome">
+		<item-type>Switch</item-type>
+		<label>Metronome</label>
+		<description>Toggles the metronome during playback or recording.</description>
+	</channel-type>
+	<channel-type id="action">
+		<item-type>String</item-type>
+		<label>Execute an Action</label>
+		<description>Sends a predefined action to Reaper to control the UI and/or perform other tasks</description>
+		<state>
+			<options>
+				<option value="1007">Play</option>
+				<option value="40073">Play/Pause</option>
+				<option value="40667">Stop</option>
+				<option value="1013">Record/stop</option>
+				<option value="40172">Go to previous marker</option>
+				<option value="40173">Go to next marker</option>
+				<option value="40026">Save project</option>
+			</options>
+		</state>
+	</channel-type>
+
+</thing:thing-descriptions>
